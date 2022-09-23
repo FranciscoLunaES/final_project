@@ -10,6 +10,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="d-flex h-100">
+      <%= render "layouts/sidebar" %>
+      <div class="w-100">
+        <%= render "layouts/navigation" %>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
