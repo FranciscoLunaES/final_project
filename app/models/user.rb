@@ -3,6 +3,8 @@
 class User < ApplicationRecord
   include AuthorizedPersona::Persona
 
+  has_many :plans, dependent: :destroy
+
   authorization_tiers(
     member: 'Member - limited access',
     manager: 'Manager - board access',
