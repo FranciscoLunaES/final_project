@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_26_225851) do
+ActiveRecord::Schema.define(version: 2022_09_26_230335) do
 
   create_table "boards", force: :cascade do |t|
     t.string "visibility"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_225851) do
     t.string "name"
     t.text "description"
     t.string "priority"
+    t.integer "board_id", null: false
+    t.index ["board_id"], name: "index_lists_on_board_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -69,4 +71,5 @@ ActiveRecord::Schema.define(version: 2022_09_26_225851) do
   end
 
   add_foreign_key "boards", "users"
+  add_foreign_key "lists", "boards"
 end
