@@ -26,7 +26,6 @@ gem 'jbuilder', '~> 2.7'
 gem 'authorized_persona'
 gem 'bootstrap', '~> 5.2.1'
 gem 'devise'
-gem 'her'
 gem 'money-rails', '~>1.12'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
