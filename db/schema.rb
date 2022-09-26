@@ -10,55 +10,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_26_203722) do
-
-  create_table "boards", force: :cascade do |t|
-    t.string "visibility"
-    t.string "name"
-    t.string "description"
+ActiveRecord::Schema.define(version: 20_220_926_223_011) do
+  create_table 'boards', force: :cascade do |t|
+    t.string 'visibility'
+    t.string 'name'
+    t.string 'description'
   end
 
-  create_table "lists", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.string "priority"
+  create_table 'labels', force: :cascade do |t|
+    t.string 'color'
+    t.string 'name'
   end
 
-  create_table "plans", force: :cascade do |t|
-    t.string "name"
-    t.integer "quantity_members"
-    t.integer "duration"
-    t.integer "price_cents", default: 0, null: false
-    t.string "price_currency", default: "USD", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'lists', force: :cascade do |t|
+    t.string 'name'
+    t.text 'description'
+    t.string 'priority'
   end
 
-  create_table "tasks", primary_key: "task_id", force: :cascade do |t|
-    t.string "title"
-    t.text "details"
-    t.integer "doing_time"
-    t.string "justification"
-    t.datetime "started_at"
-    t.datetime "finished_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'plans', force: :cascade do |t|
+    t.string 'name'
+    t.integer 'quantity_members'
+    t.integer 'duration'
+    t.integer 'price_cents', default: 0, null: false
+    t.string 'price_currency', default: 'USD', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.string "surname"
-    t.boolean "security_updates"
-    t.string "authorization_tier"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  create_table 'tasks', primary_key: 'task_id', force: :cascade do |t|
+    t.string 'title'
+    t.text 'details'
+    t.integer 'doing_time'
+    t.string 'justification'
+    t.datetime 'started_at'
+    t.datetime 'finished_at'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
+  create_table 'users', force: :cascade do |t|
+    t.string 'email', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'name'
+    t.string 'surname'
+    t.boolean 'security_updates'
+    t.string 'authorization_tier'
+    t.index ['email'], name: 'index_users_on_email', unique: true
+    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
+  end
 end
