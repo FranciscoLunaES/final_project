@@ -4,6 +4,4 @@ class BoardsControllers < ApplicationController
     manager: :all,
     admin: :all
   )
-
-  has_many :lists
 end
