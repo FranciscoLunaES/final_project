@@ -1,9 +1,7 @@
-class BoardsControllers < ApplicationController
+class ListsController < ApplicationController
   grant(
     member: %i[index show],
     manager: :all,
     admin: :all
   )
-
-  has_many :lists
 end
