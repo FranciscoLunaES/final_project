@@ -4,6 +4,7 @@ class User < ApplicationRecord
   include AuthorizedPersona::Persona
 
   has_many :plans, dependent: :destroy
+  has_many :boards, dependent: :destroy
 
   authorization_tiers(
     member: 'Member - limited access',
