@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_26_230335) do
+ActiveRecord::Schema.define(version: 2022_09_26_230754) do
 
   create_table "boards", force: :cascade do |t|
     t.string "visibility"
@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_230335) do
     t.datetime "finished_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "list_id", null: false
+    t.index ["list_id"], name: "index_tasks_on_list_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -72,4 +74,5 @@ ActiveRecord::Schema.define(version: 2022_09_26_230335) do
 
   add_foreign_key "boards", "users"
   add_foreign_key "lists", "boards"
+  add_foreign_key "tasks", "lists"
 end
