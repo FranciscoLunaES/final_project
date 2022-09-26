@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_26_230754) do
+ActiveRecord::Schema.define(version: 2022_09_26_233250) do
 
   create_table "boards", force: :cascade do |t|
     t.string "visibility"
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 2022_09_26_230754) do
     t.string "price_currency", default: "USD", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "task_labels", force: :cascade do |t|
+    t.integer "task_id"
+    t.integer "label_id"
+    t.index ["label_id"], name: "index_task_labels_on_label_id"
+    t.index ["task_id"], name: "index_task_labels_on_task_id"
   end
 
   create_table "tasks", primary_key: "task_id", force: :cascade do |t|
