@@ -1,0 +1,14 @@
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude: 
+    - config/environments/development.rb
+
+Layout/LineLength:
+  Exclude: 
+    - config/initializers/devise.rb
+
+AllCops:
+  Exclude:
+    - bin/bundle
