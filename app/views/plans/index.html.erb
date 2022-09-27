@@ -1,0 +1,36 @@
+<section class="list-plans">
+  <h4>Pick your plan</h4>
+  <div class="plans-container">
+    <% if @plans %>
+      <% @plans.each do |plan| %>
+        <div class="card-container">
+          <articles class="card plan-card">
+            <div class="card-header">
+              <%= image_tag("rocket", class: "plan-image") %>
+              <h3><%= plan.name %></h3>
+            </div>
+            <div class="card-body">
+              <p class="small-description">For personal and small projects</p>
+              <p class="price">$<%= "#{plan.price_cents}  #{plan.price_currency}" %></p>
+              <span class="duration"><%= pluralize(plan.duration, "Month") %></span>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-primary">Purchase</button>
+            </div>
+          </articles>
+          <div class="full-characteristics">
+            <h4>Plan includes:</h4>
+            <div class="characteristic">
+              <i class="fa-solid fa-check check"></i>
+              <span>Up to <%= pluralize(plan.quantity_members, "member") %></span>
+            </div>
+            <div class="characteristic">
+              <i class="fa-solid fa-check check"></i>
+              <span>A max of 10 boards</span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</section>

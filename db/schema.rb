@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_26_233250) do
+ActiveRecord::Schema.define(version: 2022_09_27_165507) do
 
   create_table "boards", force: :cascade do |t|
     t.string "visibility"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_233250) do
     t.string "price_currency", default: "USD", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
   create_table "task_labels", force: :cascade do |t|
@@ -81,5 +83,6 @@ ActiveRecord::Schema.define(version: 2022_09_26_233250) do
 
   add_foreign_key "boards", "users"
   add_foreign_key "lists", "boards"
+  add_foreign_key "plans", "users"
   add_foreign_key "tasks", "lists"
 end

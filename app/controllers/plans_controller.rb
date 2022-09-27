@@ -5,5 +5,7 @@ class PlansController < ApplicationController
     admin: :all
   )
 
-  def index; end
+  def index
+    @plans = Plan.all
+  end
 end
