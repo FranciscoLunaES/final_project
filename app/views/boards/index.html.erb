@@ -1,0 +1,59 @@
+<section class="list-boards">
+  <article class="boards-container">
+    <% presenter = BoardPresenter.new(@boards) %>
+    <div class="visibility">
+      <p id="public" class="fw-bold">
+        Public
+        <span class="badge text-bg-secondary"
+          ><%= presenter.public_boards.length %></span
+        >
+      </p>
+      <p id="private">
+        Private<span class="badge text-bg-secondary"
+          ><%= presenter.private_boards.length %></span
+        >
+      </p>
+    </div>
+    <div class="row-boards public-boards" style="display: flex">
+      <% presenter.public_boards.each do |board| %>
+      <div class="full-card-board">
+        <div class="card board">
+          <div class="board-circle rounded-circle">
+            <%= image_tag("rocket", class: "image-board") %>
+          </div>
+          <h4 class="name"><%= board.name %></h4>
+          <p class="tasks-counter"><%= board.lists.count %></p>
+          <span class="tasks-label">Tasks complete</span>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <div class="row-boards private-boards" style="display: none">
+      <% presenter.private_boards.each do |board| %>
+      <div class="full-card-board">
+        <div class="card board">
+          <div class="board-circle rounded-circle">
+            <%= image_tag("rocket", class: "image-board") %>
+          </div>
+          <h4 class="name"><%= board.name %></h4>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </article>
+  <nav class="pagination-container">
+    <ul class="pagination">
+      <li class="page-item disabled">
+        <a class="page-link">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="#">2</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+</section>
