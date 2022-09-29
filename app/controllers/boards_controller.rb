@@ -1,9 +1,11 @@
-class BoardsControllers < ApplicationController
+class BoardsController < ApplicationController
   grant(
     member: %i[index show],
     manager: :all,
     admin: :all
   )
 
-  has_many :lists
+  def index
+    @boards = Board.all
+  end
 end

@@ -10,18 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_26_203722) do
+ActiveRecord::Schema.define(version: 2022_09_27_165507) do
 
   create_table "boards", force: :cascade do |t|
     t.string "visibility"
     t.string "name"
     t.string "description"
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_boards_on_user_id"
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string "color"
+    t.string "name"
   end
 
   create_table "lists", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "priority"
+    t.integer "board_id", null: false
+    t.index ["board_id"], name: "index_lists_on_board_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -32,6 +41,15 @@ ActiveRecord::Schema.define(version: 2022_09_26_203722) do
     t.string "price_currency", default: "USD", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
+  create_table "task_labels", force: :cascade do |t|
+    t.integer "task_id"
+    t.integer "label_id"
+    t.index ["label_id"], name: "index_task_labels_on_label_id"
+    t.index ["task_id"], name: "index_task_labels_on_task_id"
   end
 
   create_table "tasks", primary_key: "task_id", force: :cascade do |t|
@@ -43,6 +61,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_203722) do
     t.datetime "finished_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "list_id", null: false
+    t.index ["list_id"], name: "index_tasks_on_list_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -61,4 +81,8 @@ ActiveRecord::Schema.define(version: 2022_09_26_203722) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "boards", "users"
+  add_foreign_key "lists", "boards"
+  add_foreign_key "plans", "users"
+  add_foreign_key "tasks", "lists"
 end
