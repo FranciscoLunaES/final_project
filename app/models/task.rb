@@ -3,4 +3,7 @@ class Task < ApplicationRecord
 
   has_many :TaskLabels
   has_many :labels, through: :TaskLabels
+
+  validates :title, presence: true,
+                   length: { minimum: 3, maximum: 15 }
 end
