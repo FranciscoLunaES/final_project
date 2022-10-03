@@ -1,0 +1,57 @@
+<div
+  class="modal fade edit-board-modal"
+  id="editBoardModal<%= board.id %>"
+  tabindex="-1"
+  aria-labelledby="editBoardModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editBoardModalLabel">Edit board</h5>
+        <button type="button" class="btn close" data-bs-dismiss="modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <%= form_with(model: board, local:true) do |f| %>
+      <div class="modal-body form-edit-board">
+        <div class="fields-container">
+          <div class="form-group row">
+            <div class="col-10">
+              <i class="fa-regular fa-square-check fa-lg"></i>
+              <%= f.text_field :name, class: "field", placeholder: "Name your
+              Board" %>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="label-container">
+              <i class="fa-solid fa-align-left"></i>
+              <%= f.label :description, class: "col-form-label" %><br />
+            </div>
+            <div class="col-12">
+              <%= f.text_area :description, class: "field-area", placeholder:
+              "Add your description" %>
+            </div>
+          </div>
+
+          <div class="form-group row points-control">
+            <div class="col-12 d-flex">
+              <span class="points-label"
+                ><%= f.label :visibility, class: "col-form-label" %></span
+              >
+              <%= f.select(:visibility, visibility_for_select, {}, class:
+              "select-points form-select") %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="form-group row justify-content-center">
+          <%= f.submit "Save changes", class:"btn edit-board-btn" %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

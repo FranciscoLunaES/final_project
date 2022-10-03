@@ -5,12 +5,13 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application',"https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;1,100&family=Rubik:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap", 
+    media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <div class="d-flex h-100">
+    <div class="d-flex" style="min-height: 100%">
       <%= render "layouts/sidebar" %>
       <div class="w-100">
         <%= render "layouts/navigation" %>

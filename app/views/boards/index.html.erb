@@ -1,22 +1,62 @@
 <section class="list-boards">
   <article class="boards-container">
     <% presenter = BoardPresenter.new(@boards) %>
-    <div class="visibility">
-      <p id="public" class="fw-bold">
-        Public
-        <span class="badge text-bg-secondary"
-          ><%= presenter.public_boards.length %></span
+    <div class="board-index-header">
+      <div class="visibility">
+        <p id="public" class="fw-bold">
+          Public
+          <span class="badge text-bg-secondary"
+            ><%= presenter.public_boards.length %></span
+          >
+        </p>
+        <p id="private">
+          Private<span class="badge text-bg-secondary"
+            ><%= presenter.private_boards.length %></span
+          >
+        </p>
+      </div>
+      <div
+        class="add-board-container"
+        data-bs-toggle="modal"
+        data-bs-target="#newBoardModal"
+      >
+        <div
+          class="d-flex justify-content-center align-items-center me-2 plus"
+          style="width: 25px; height: 25px"
         >
-      </p>
-      <p id="private">
-        Private<span class="badge text-bg-secondary"
-          ><%= presenter.private_boards.length %></span
-        >
-      </p>
+          <i class="fa-solid fa-plus"></i>
+        </div>
+        <a class="new-board navbar-brand">New project</a>
+      </div>
     </div>
     <div class="row-boards public-boards" style="display: flex">
       <% presenter.public_boards.each do |board| %>
       <div class="full-card-board">
+        <div class="board-actions">
+          <i
+            class="fa-solid fa-ellipsis"
+            id="boardPublicActions"
+            data-bs-toggle="dropdown"
+          ></i>
+          <ul
+            class="dropdown-menu text-small shadow"
+            aria-labelledby="boardPublicActions"
+          >
+            <li>
+              <a
+                class="dropdown-item"
+                data-bs-toggle="modal"
+                data-bs-target="#editBoardModal<%= board.id %>"
+                >Edit board</a
+              >
+            </li>
+            <li class="item-danger-delete">
+              <%= link_to "Delete board", board_path(board), method: :delete,
+              data: {confirm: "Are you sure?"}, class:"dropdown-item" %>
+            </li>
+          </ul>
+        </div>
+        <%= link_to board_path(board), class: "nav-link link-dark" do %>
         <div class="card board">
           <div class="board-circle rounded-circle">
             <%= image_tag("rocket", class: "image-board") %>
@@ -25,18 +65,48 @@
           <p class="tasks-counter"><%= board.lists.count %></p>
           <span class="tasks-label">Tasks complete</span>
         </div>
+        <% end %>
       </div>
-      <% end %>
+      <%= render template: "boards/edit", locals: {board: board} %> <% end %>
     </div>
     <div class="row-boards private-boards" style="display: none">
       <% presenter.private_boards.each do |board| %>
       <div class="full-card-board">
+        <div class="board-actions">
+          <i
+            class="fa-solid fa-ellipsis"
+            id="boardPrivateActions"
+            data-bs-toggle="dropdown"
+          ></i>
+          <ul
+            class="dropdown-menu text-small shadow"
+            aria-labelledby="boardPrivateActions"
+          >
+            <li>
+              <a
+                class="dropdown-item"
+                data-bs-toggle="modal"
+                data-bs-target="#editBoardModal<%= board.id %>"
+                >Edit board</a
+              >
+            </li>
+            <li class="item-danger-delete">
+              <%= link_to "Delete board", board_path(board), method: :delete,
+              data: {confirm: "Are you sure?"}, class:"dropdown-item" %>
+            </li>
+          </ul>
+        </div>
+        <%= render template: "boards/edit", locals: {board: board} %> <%=
+        link_to board_path(board), class: "nav-link link-dark" do %>
         <div class="card board">
           <div class="board-circle rounded-circle">
             <%= image_tag("rocket", class: "image-board") %>
           </div>
           <h4 class="name"><%= board.name %></h4>
+          <p class="tasks-counter"><%= board.lists.count %></p>
+          <span class="tasks-label">Tasks complete</span>
         </div>
+        <% end %>
       </div>
       <% end %>
     </div>
@@ -57,3 +127,4 @@
     </ul>
   </nav>
 </section>
+<%= render template: "boards/new", locals: {boards: @boards} %>

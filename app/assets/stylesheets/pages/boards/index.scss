@@ -6,12 +6,30 @@
   flex-direction: column;
   justify-content: space-between;
   .boards-container {
-    .visibility {
+    .board-index-header {
       display: flex;
-      gap: 30px;
-      p {
-        .badge {
-          margin-left: 10px;
+      justify-content: space-between;
+      .visibility {
+        display: flex;
+        gap: 30px;
+        p {
+          .badge {
+            margin-left: 10px;
+          }
+        }
+      }
+      .add-board-container {
+        display: flex;
+        .plus{
+          border: 1px solid rgba(13, 110, 253, 0.7);
+          border-radius: 50%;
+        }
+        .plus,
+        .new-board {
+          color: rgba(13, 110, 253, 0.7);
+        }
+        .new-board {
+          font-weight: 700;
         }
       }
     }
@@ -25,6 +43,19 @@
         flex-direction: column;
         align-items: center;
         width: 300px;
+        position: relative;
+        .board-actions {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          z-index: 1;
+          .item-danger-delete {
+            background-color: rgba(255, 111, 89, 1);
+            a {
+              color: #fff;
+            }
+          }
+        }
         .board {
           width: 300px;
           height: 300px;

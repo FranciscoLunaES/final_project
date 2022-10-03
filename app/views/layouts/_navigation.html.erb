@@ -1,11 +1,12 @@
 <nav class="navbar navbar-expand-lg shadow-sm">
   <div class="container-fluid" style="gap: 50%">
     <div class="d-flex align-items-center">
-
       <i class="fa-solid fa-bars me-4"></i>
       <div
         class="border rounded-circle d-flex justify-content-center align-items-center me-2"
         style="width: 25px; height: 25px"
+        data-bs-toggle="modal"
+        data-bs-target="#newBoardModal"
       >
         <i class="fa-solid fa-plus"></i>
       </div>
@@ -35,7 +36,10 @@
         <li><a class="dropdown-item" href="#">Settings</a></li>
         <li><a class="dropdown-item" href="#">Profile</a></li>
         <li><hr class="dropdown-divider" /></li>
-        <li><%= button_to "Sign out", destroy_user_session_path, class: "dropdown-item", :method => :delete %></li>
+        <li>
+          <%= button_to "Sign out", destroy_user_session_path, class:
+          "dropdown-item", :method => :delete %>
+        </li>
       </ul>
     </div>
   </div>

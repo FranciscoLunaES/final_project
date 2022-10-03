@@ -1,0 +1,86 @@
+.new-task-modal {
+  border-radius: 5px;
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+        .modal-title {
+          font-size: 14px;
+        }
+        .close {
+          border-radius: 50%;
+          width: 25px;
+          height: 25px;
+          padding: 0;
+          border: 1px solid rgba(0, 0, 0, 0.3);
+        }
+      }
+      .form-new-task {
+        display: flex;
+        .fields-container {
+          width: 520px;
+          height: 500px;
+          .form-group {
+            margin-top: 10px;
+            .label-container {
+              display: flex;
+              align-items: center;
+              .fa-solid {
+                margin-right: 10px;
+              }
+            }
+            .fa-regular {
+              margin-right: 10px;
+            }
+            .field {
+              border: 0px;
+            }
+            .field-area {
+              border: 0px;
+              width: 100%;
+              height: 120px;
+            }
+          }
+        }
+        .aside-form {
+          padding-top: 15px;
+          .date-control {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            .date-label {
+              font-family: "Rubik";
+              font-weight: bold;
+              margin-right: 5px;
+            }
+            .date {
+              border: 0px;
+              width: 145px;
+            }
+          }
+          .points-control {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            .points-label {
+              font-family: "Rubik";
+              font-weight: bold;
+              margin-right: 10px;
+            }
+            .select-points {
+              width: 50px;
+              padding: 0 0 0 5px;
+            }
+          }
+        }
+      }
+      .modal-footer {
+        border-top: 0px;
+        .add-task-btn {
+          width: 100px;
+          background-color: rgba(157, 255, 249, 0.5);
+          color: rgba(0, 0, 0, 0.6);
+        }
+      }
+    }
+  }
+}
