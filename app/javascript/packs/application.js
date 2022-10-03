@@ -40,4 +40,20 @@ $(document).on("turbolinks:load", function () {
   $("#private").click(function () {
     handleBoardsVisibility("private");
   });
+  handleSectionActive();
 });
+
+const handleSectionActive = () => {
+  const location =
+    (window.location.pathname + "/").match(/(?<=\/)(.*?)(?=\/)/)[0];
+  const sectionList = ["plans", "boards"];
+  sectionList.map((item) => {
+    if (item == location) {
+      $(`#${item}`).removeClass("link-dark");
+      $(`#${item}`).addClass("active");
+    } else {
+      $(`#${item}`).removeClass("active");
+      $(`#${item}`).addClass("link-dark");
+    }
+  });
+};

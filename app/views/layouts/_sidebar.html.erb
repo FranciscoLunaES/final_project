@@ -8,12 +8,12 @@
   <hr />
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
-      <%= link_to plans_path, class: "nav-link active" do %>
+      <%= link_to plans_path, class: "nav-link active", id: "plans" do %>
         <i class="fa-regular fa-clock me-2"></i>Home
       <% end %>
     </li>
-    <li>
-      <%= link_to boards_path, class: "nav-link link-dark" do %>
+    <li class="nav-item">
+      <%= link_to boards_path, class: "nav-link link-dark", id: "boards" do %>
         <i class="fa-solid fa-suitcase me-2"></i>Projects
       <% end %>
     </li>
