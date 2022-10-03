@@ -1,0 +1,132 @@
+.board-show {
+  padding: 40px;
+  background-color: rgb(248, 249, 250);
+  min-height: 93%;
+  .subheader {
+    display: flex;
+    justify-content: space-between;
+    .titles {
+      display: flex;
+      .nav-link {
+        margin-right: 10px;
+      }
+    }
+    .team {
+      display: flex;
+      .add-member {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #8783d1;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        margin-top: 5px;
+        background-color: #8783d1;
+        .fa-solid {
+          color: #fff;
+        }
+      }
+    }
+  }
+  .lists-container {
+    margin-top: 50px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 74vw;
+    white-space: nowrap;
+    gap: 30px;
+    .list {
+      --bs-card-cap-bg: none;
+      width: 320px;
+      display: inline-flex;
+      .item-danger-delete {
+        background-color: rgba(255, 111, 89, 1);
+        a {
+          color: #fff;
+        }
+      }
+      .list-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+        border-bottom: 0px;
+        .name {
+          font-family: "Rubik";
+          font-weight: 400;
+        }
+      }
+      .list-body {
+        padding: 16px 8px;
+        .task {
+          height: 90px;
+          margin-bottom: 15px;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+          transition: 0.3s;
+          --bs-card-cap-bg: none;
+          .task-header {
+            border-bottom: 0px;
+            .task-title {
+              font-family: "Rubik";
+              font-weight: 400;
+              font-size: 18px;
+              margin: 5px 0 0;
+            }
+          }
+          .task-footer {
+            border-top: 0px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            span {
+              font-size: 13px;
+              font-family: "Rubik";
+              font-weight: 200;
+            }
+          }
+        }
+        .task:hover {
+          background-color: #8783d1;
+          cursor: pointer;
+        }
+      }
+      .list-footer {
+        margin: 10px;
+        border-top: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px dotted rgba(0, 0, 0, 0.1);
+        padding: 22px 10px;
+        border-radius: 5px;
+        .add-card {
+          font-size: 12px;
+          color: rgba(0, 0, 0, 0.3);
+          .fa-plus {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+    .new-list {
+      width: 340px;
+      display: inline-flex;
+      height: 70px;
+      border-radius: 0.375rem;
+      border: 1px dotted rgba(0, 0, 0, 0.1);
+      align-items: center;
+      justify-content: center;
+      .add-list {
+        font-size: 15px;
+        color: rgba(0, 0, 0, 0.3);
+        .fa-plus {
+          margin-right: 10px;
+        }
+      }
+    }
+    .new-list:hover {
+      cursor: pointer;
+    }
+  }
+}

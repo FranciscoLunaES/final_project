@@ -1,0 +1,84 @@
+<div
+  class="modal fade edit-task-modal"
+  id="editTaskModal<%= task.id %>"
+  tabindex="-1"
+  aria-labelledby="editTaskModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newTaskModalLabel">Task details</h5>
+        <button type="button" class="btn close" data-bs-dismiss="modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <%= form_with(model: [board, list, task], local:true, method: :patch) do
+      |f| %>
+      <div class="modal-body form-new-task">
+        <div class="fields-container">
+          <div class="form-group row">
+            <div class="col-10">
+              <i class="fa-regular fa-square-check fa-lg"></i>
+              <%= f.text_field :title, class: "field", placeholder: "Name your
+              task" %>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="label-container">
+              <i class="fa-solid fa-align-left"></i>
+              <%= f.label :details, class: "col-form-label" %><br />
+            </div>
+            <div class="col-12">
+              <%= f.text_area :details, class: "field-area", placeholder: "Add
+              your description" %>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="label-container">
+              <i class="fa-solid fa-align-left"></i>
+              <%= f.label :justification, class: "col-form-label" %><br />
+            </div>
+            <div class="col-12">
+              <%= f.text_area :justification, class: "field-area", placeholder:
+              "Add your justification" %>
+            </div>
+          </div>
+        </div>
+        <div class="aside-form">
+          <div class="date-control">
+            <span class="date-label">Start</span>
+            <%= f.datetime_field(:started_at, class:"date") %>
+          </div>
+          <div class="date-control">
+            <span class="date-label">Due</span>
+            <%= f.datetime_field(:finished_at, class:"date") %>
+          </div>
+          <div class="points-control">
+            <span class="points-label">Story Points</span>
+            <%= f.select(:doing_time, points_for_select, {}, class: "select-points
+            form-select") %>
+          </div>
+          <div class="move-control">
+            <span class="move-label">Move</span>
+            <%= f.select(:list_id, lists_for_select, {}, class: "select-move
+            form-select") %>
+          </div>
+          <div class="item-danger-delete">
+            <%= link_to "Delete", board_list_task_path(board, list, task),
+            method: :delete, data: {confirm: "Are you sure?"},
+            class:"dropdown-item" %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="form-group row justify-content-center">
+          <%= f.submit "Save changes", class:"btn edit-task-btn" %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
