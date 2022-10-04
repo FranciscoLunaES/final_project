@@ -1,8 +1,37 @@
 # frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+
+puts 'Seeding...'
+
+user = User.create(email: Faker::Internet.email,
+                   name: Faker::Internet.name,
+                   surname: Faker::Internet.name,
+                   security_updates: true,
+                   authorization_tier: 'member',
+                   password: 'test123')
+
+board = Board.create(visibility: 'public',
+                     name: 'TaskTaker',
+                     description: 'Current project',
+                     user_id: user.id)
+
+list = List.create(name: 'testing',
+                   description: 'Before deploy',
+                   priority: 'Low',
+                   board_id: board.id)
+
+Task.create(title: 'Fix login page',
+            details: 'Right now',
+            doing_time: 4,
+            justification: 'Has a bug',
+            started_at: '2022-09-26 23:10:19',
+            finished_at: '2022-09-26 23:10:19',
+            list_id: list.id)
+
+Label.create(name: 'bug',
+             color: 'red')
+
+puts 'Seeding done.'

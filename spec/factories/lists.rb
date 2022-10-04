@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :list do
     name { 'testing' }
     description { 'Before deploy' }
-    priority { 'low' }
+    priority { 'Low' }
     board_id { '' }
   end
 end
