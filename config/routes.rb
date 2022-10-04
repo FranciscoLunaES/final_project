@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       resources :tasks
     end
   end
+  resources :labels
+  resources :tags
   resources :plans
   root 'pages#home'
 end

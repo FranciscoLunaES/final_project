@@ -1,0 +1,2 @@
+module TaskLabelHelper
+end
