@@ -8,13 +8,24 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="newTaskModalLabel">Task details</h5>
-        <button type="button" class="btn close" data-bs-dismiss="modal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <div class="header">
+          <h5 class="modal-title" id="newTaskModalLabel">Task details</h5>
+          <button type="button" class="btn close" data-bs-dismiss="modal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="task-labels">
+          <% task_labels(task).each do |label| %>
+          <span
+            class="badge rounded-pill"
+            style="background-color: <%= label.color %>"
+            ><%= label.name %></span
+          >
+          <% end %>
+        </div>
       </div>
-      <%= form_with(model: [board, list, task], local:true, method: :patch) do
-      |f| %>
+      <%= form_with(model: [board, list, task], local:true, method: :patch, id:
+      "task_edit_#{task.id}") do |f| %>
       <div class="modal-body form-new-task">
         <div class="fields-container">
           <div class="form-group row">
@@ -58,14 +69,39 @@
           </div>
           <div class="points-control">
             <span class="points-label">Story Points</span>
-            <%= f.select(:doing_time, points_for_select, {}, class: "select-points
-            form-select") %>
+            <%= f.select(:doing_time, points_for_select, {}, class:
+            "select-points form-select") %>
           </div>
           <div class="move-control">
             <span class="move-label">Move</span>
             <%= f.select(:list_id, lists_for_select, {}, class: "select-move
             form-select") %>
           </div>
+          <% end %>
+
+          <div class="labels-control">
+            <%= form_with(url: "/tags", local:true) do |l| %>
+            <span class="labels-label">Label</span>
+            <div class="add-label">
+              <%= l.hidden_field :task_id, :value => task.id %>
+              <%= l.select(:label_id, labels_for_select, {}, class:
+              "select-labels form-select") %>
+              <div
+                class="d-flex justify-content-center align-items-center me-2 plus"
+                style="width: 25px; height: 25px"
+              >
+                <%= l.submit "+", class: "btn label-plus" %>
+              </div>
+            </div>
+            <span
+              class="new-label"
+              data-bs-toggle="modal"
+              data-bs-target="#newLabelModal"
+              >New Label</span
+            >
+            <% end %>
+          </div>
+
           <div class="item-danger-delete">
             <%= link_to "Delete", board_list_task_path(board, list, task),
             method: :delete, data: {confirm: "Are you sure?"},
@@ -75,10 +111,10 @@
       </div>
       <div class="modal-footer">
         <div class="form-group row justify-content-center">
-          <%= f.submit "Save changes", class:"btn edit-task-btn" %>
+          <%= submit_tag "Save changes", class:"btn edit-task-btn", form:"task_edit_#{task.id}" %>
         </div>
       </div>
-      <% end %>
     </div>
   </div>
 </div>
+<%= render template: "labels/new" %>

@@ -3,15 +3,24 @@
   .modal-dialog {
     .modal-content {
       .modal-header {
-        .modal-title {
-          font-size: 14px;
+        flex-direction: column;
+        .header {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          .modal-title {
+            font-size: 14px;
+          }
+          .close {
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            padding: 0;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+          }
         }
-        .close {
-          border-radius: 50%;
-          width: 25px;
-          height: 25px;
-          padding: 0;
-          border: 1px solid rgba(0, 0, 0, 0.3);
+        .task-labels {
+          align-self: flex-start;
         }
       }
       .form-new-task {
@@ -43,6 +52,32 @@
         }
         .aside-form {
           padding-top: 15px;
+          .labels-control {
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: column;
+            margin: 20px 0 20px auto;
+            width: 70%;
+            .add-label {
+              display: flex;
+              .select-labels {
+                width: 100px;
+                padding: 0 0 0 5px;
+              }
+              .label-plus {
+                background-color: transparent;
+              }
+            }
+            .labels-label {
+              font-family: "Rubik";
+              font-weight: bold;
+              margin-right: 10px;
+            }
+            .new-label {
+              font-weight: 300;
+              font-size: 12px;
+            }
+          }
           .date-control {
             display: flex;
             justify-content: flex-end;
