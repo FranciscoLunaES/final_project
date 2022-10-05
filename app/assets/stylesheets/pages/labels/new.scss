@@ -1,0 +1,52 @@
+.new-label-modal {
+  border-radius: 5px;
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+        .modal-title {
+          font-size: 14px;
+        }
+        .close {
+          border-radius: 50%;
+          width: 25px;
+          height: 25px;
+          padding: 0;
+          border: 1px solid rgba(0, 0, 0, 0.3);
+        }
+      }
+      .form-new-label {
+        display: flex;
+        .fields-container {
+          height: 50px;
+          width: 100%;
+          .form-group {
+            margin-top: 10px;
+            .color-container {
+              display: flex;
+              align-items: center;
+              width: 100%;
+              .fa-regular {
+                margin-right: 10px;
+              }
+              .field {
+                border: 0px;
+              }
+              .color-label {
+                font-weight: 600;
+                margin-right: 10px;
+              }
+            }
+          }
+        }
+      }
+      .modal-footer {
+        border-top: 0px;
+        .new-label-btn {
+          width: 100px;
+          background-color: rgba(157, 255, 249, 0.5);
+          color: rgba(0, 0, 0, 0.6);
+        }
+      }
+    }
+  }
+}

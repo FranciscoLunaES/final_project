@@ -1,0 +1,67 @@
+.edit-board-modal {
+  border-radius: 5px;
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+        .modal-title {
+          font-size: 14px;
+        }
+        .close {
+          border-radius: 50%;
+          width: 25px;
+          height: 25px;
+          padding: 0;
+          border: 1px solid rgba(0, 0, 0, 0.3);
+        }
+      }
+      .form-edit-board {
+        display: flex;
+        .fields-container {
+          height: 230px;
+          width: 100%;
+          .form-group {
+            margin-top: 10px;
+            .label-container {
+              display: flex;
+              align-items: center;
+              .fa-solid {
+                margin-right: 10px;
+              }
+            }
+            .fa-regular {
+              margin-right: 10px;
+            }
+            .field {
+              border: 0px;
+            }
+            .field-area {
+              border: 0px;
+              width: 100%;
+              height: 80px;
+            }
+          }
+          .points-control {
+            display: flex;
+            margin-bottom: 20px;
+            .points-label {
+              font-family: "Rubik";
+              font-weight: bold;
+              margin-right: 10px;
+            }
+            .select-points {
+              padding: 0 0 0 5px;
+            }
+          }
+        }
+      }
+      .modal-footer {
+        border-top: 0px;
+        .edit-board-btn {
+          width: 150px;
+          background-color: rgba(157, 255, 249, 0.5);
+          color: rgba(0, 0, 0, 0.6);
+        }
+      }
+    }
+  }
+}

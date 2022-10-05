@@ -1,0 +1,145 @@
+.edit-task-modal {
+  border-radius: 5px;
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+        flex-direction: column;
+        .header {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          .modal-title {
+            font-size: 14px;
+          }
+          .close {
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            padding: 0;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+          }
+        }
+        .task-labels {
+          align-self: flex-start;
+        }
+      }
+      .form-new-task {
+        display: flex;
+        .fields-container {
+          width: 520px;
+          height: 500px;
+          .form-group {
+            margin-top: 10px;
+            .label-container {
+              display: flex;
+              align-items: center;
+              .fa-solid {
+                margin-right: 10px;
+              }
+            }
+            .fa-regular {
+              margin-right: 10px;
+            }
+            .field {
+              border: 0px;
+            }
+            .field-area {
+              border: 0px;
+              width: 100%;
+              height: 120px;
+            }
+          }
+        }
+        .aside-form {
+          padding-top: 15px;
+          .labels-control {
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: column;
+            margin: 20px 0 20px auto;
+            width: 70%;
+            .add-label {
+              display: flex;
+              .select-labels {
+                width: 100px;
+                padding: 0 0 0 5px;
+              }
+              .label-plus {
+                background-color: transparent;
+              }
+            }
+            .labels-label {
+              font-family: "Rubik";
+              font-weight: bold;
+              margin-right: 10px;
+            }
+            .new-label {
+              font-weight: 300;
+              font-size: 12px;
+            }
+          }
+          .date-control {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            .date-label {
+              font-family: "Rubik";
+              font-weight: bold;
+              margin-right: 5px;
+            }
+            .date {
+              border: 0px;
+              width: 145px;
+            }
+          }
+          .points-control {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            .points-label {
+              font-family: "Rubik";
+              font-weight: bold;
+              margin-right: 10px;
+            }
+            .select-points {
+              width: 50px;
+              padding: 0 0 0 5px;
+            }
+          }
+          .move-control {
+            display: flex;
+            justify-content: flex-end;
+            margin: 50px 0 20px;
+            .move-label {
+              font-family: "Rubik";
+              font-weight: bold;
+              margin-right: 10px;
+            }
+            .select-move {
+              width: 110px;
+              padding: 0 0 0 5px;
+            }
+          }
+          .item-danger-delete {
+            background-color: rgba(255, 111, 89, 1);
+            height: 30px;
+            text-align: center;
+            border-radius: 5px;
+            margin-top: 102px;
+            a {
+              color: #fff;
+            }
+          }
+        }
+      }
+      .modal-footer {
+        border-top: 0px;
+        .edit-task-btn {
+          width: 150px;
+          background-color: rgba(157, 255, 249, 0.5);
+          color: rgba(0, 0, 0, 0.6);
+        }
+      }
+    }
+  }
+}
