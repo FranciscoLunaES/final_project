@@ -20,6 +20,10 @@ class User < ApplicationRecord
     admin: 'Admin - all access'
   )
 
+  enum roles: { member: 'Member - limited access',
+                manager: 'Manager - board access',
+                admin: 'Admin - all access' }
+
   validates :authorization_tier, inclusion: { in: authorization_tier_names }
 
   # Include default devise modules. Others available are:

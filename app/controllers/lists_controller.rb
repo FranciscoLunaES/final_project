@@ -8,11 +8,15 @@ class ListsController < ApplicationController
   def create
     @board = Board.find(params[:board_id])
     @list = @board.lists.new(list_params)
-    if @list.save
-      flash[:notice] = 'List was created successfully'
-      redirect_to @board
+    if @board.lists.length < 50
+      if @list.save
+        flash[:notice] = 'List was created successfully'
+        redirect_to @board
+      else
+        flash.now[:alert] = 'There was something wrong with your list'
+      end
     else
-      flash.now[:alert] = 'There was something wrong with your list'
+      flash.now[:alert] = 'Reached maximum of 50 lists in this board'
     end
   end
 

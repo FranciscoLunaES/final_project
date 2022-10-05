@@ -1,5 +1,7 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: %i[show update destroy]
+  before_action :require_autorized, only: %i[show update destroy]
+
   grant(
     member: %i[index show],
     manager: :all,
@@ -18,6 +20,7 @@ class BoardsController < ApplicationController
   end
 
   def index
+    @user = current_user
     @boards = Board.all
   end
 
@@ -45,5 +48,12 @@ class BoardsController < ApplicationController
 
   def board_params
     params.require(:board).permit(:name, :description, :visibility)
+  end
+
+  def require_autorized
+    unless current_user.id == @board.user_id || @board.visibility == 'public'
+      flash[:alert] = 'Only the owner or if is public can perform that action'
+      redirect_to boards_path
+    end
   end
 end

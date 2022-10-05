@@ -1,6 +1,6 @@
 <section class="list-boards">
   <article class="boards-container">
-    <% presenter = BoardPresenter.new(@boards) %>
+    <% presenter = BoardPresenter.new(@boards, @current_user) %>
     <div class="board-index-header">
       <div class="visibility">
         <p id="public" class="fw-bold">

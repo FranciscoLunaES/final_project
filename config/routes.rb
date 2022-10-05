@@ -3,13 +3,15 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    invitations: 'users/invitations'
   }
+
   resources :boards do
     resources :lists do
       resources :tasks
     end
-  end
+  end 
   resources :labels
   resources :tags
   resources :plans
