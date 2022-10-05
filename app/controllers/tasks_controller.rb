@@ -1,4 +1,7 @@
 class TasksController < ApplicationController
+  before_action :set_board, only: %i[create update destroy]
+  before_action :set_list, only: %i[create update destroy]
+  before_action :set_task, only: %i[update destroy]
   grant(
     member: :all,
     manager: :all,
@@ -6,8 +9,6 @@ class TasksController < ApplicationController
   )
 
   def create
-    @board = Board.find(params[:board_id])
-    @list = List.find(params[:list_id])
     @task = @list.tasks.new(task_params)
     if @task.save
       flash[:notice] = 'Task was created successfully'
@@ -18,9 +19,6 @@ class TasksController < ApplicationController
   end
 
   def update
-    @board = Board.find(params[:board_id])
-    @list = List.find(params[:list_id])
-    @task = @list.tasks.find(params[:id])
     if @task.update(task_params)
       flash[:notice] = 'Article was updated successfully'
       redirect_to board_path(@board)
@@ -30,14 +28,23 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @board = Board.find(params[:board_id])
-    @list = List.find(params[:list_id])
-    @task = @list.tasks.find(params[:id])
     @task.destroy
     redirect_to board_path(@board)
   end
 
   private
+
+  def set_board
+    @board = Board.find(params[:board_id])
+  end
+
+  def set_list
+    @list = List.find(params[:list_id])
+  end
+
+  def set_task
+    @task = @list.tasks.find(params[:id])
+  end
 
   def task_params
     params.require(:task).permit(:title, :details, :doing_time, :justification, :started_at, :finished_at, :list_id)

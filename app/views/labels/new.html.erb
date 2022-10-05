@@ -5,19 +5,14 @@
         <h5 class="modal-title" id="newLabelModalLabel">New label</h5>
         <button type="button" class="btn close" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <%= form_with(model: Label.new, local:true) do |f| %>
+      <%= form_with(model: Label.new, local: true) do |f| %>
         <div class="modal-body form-new-label">
           <div class="fields-container">
             <div class="form-group row">
-              <div class="col-10">
+              <div class="color-container">
                 <i class="fa-regular fa-square-check fa-lg"></i>
                 <%= f.text_field :name, class: "field", placeholder: "Name your label" %>
-              </div>
-            </div>
-  
-            <div class="form-group row points-control">
-              <div class="col-12 d-flex">
-                <span class="points-label"><%= f.label :color, class: "col-form-label" %></span>
+                <span class="color-label"><%= f.label :color, class: "col-form-label" %></span>
                 <%= f.color_field :color %>
               </div>
             </div>

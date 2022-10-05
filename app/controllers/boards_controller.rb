@@ -11,11 +11,16 @@ class BoardsController < ApplicationController
   def create
     @board = Board.new(board_params)
     @board.user = current_user
-    if @board.save
-      flash[:notice] = 'Board was created successfully'
-      redirect_to boards_path
+    if !reached_max_boards?
+      if @board.save
+        flash[:notice] = 'Board was created successfully'
+        redirect_to boards_path
+      else
+        flash.now[:alert] = 'There was something wrong with your board'
+      end
     else
-      flash.now[:alert] = 'There was something wrong with your board'
+      flash[:alert] = 'Reached maximum of 10 boards'
+      redirect_to boards_path
     end
   end
 
@@ -55,5 +60,9 @@ class BoardsController < ApplicationController
       flash[:alert] = 'Only the owner or if is public can perform that action'
       redirect_to boards_path
     end
+  end
+
+  def reached_max_boards?
+    current_user.boards.length > 10
   end
 end
