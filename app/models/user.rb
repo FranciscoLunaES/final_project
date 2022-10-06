@@ -6,6 +6,11 @@ class User < ApplicationRecord
   has_many :plans, dependent: :destroy
   has_many :boards, dependent: :destroy
 
+  has_many :members, class_name: 'User',
+                     foreign_key: 'manager_id'
+
+  belongs_to :manager, class_name: 'User', optional: true
+
   validates :name, presence: true,
                    length: { minimum: 3, maximum: 15 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

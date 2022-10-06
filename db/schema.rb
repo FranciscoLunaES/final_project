@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_04_174508) do
+ActiveRecord::Schema.define(version: 2022_10_05_212943) do
 
   create_table "boards", force: :cascade do |t|
     t.string "visibility"
@@ -85,10 +85,12 @@ ActiveRecord::Schema.define(version: 2022_10_04_174508) do
     t.string "invited_by_type"
     t.integer "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.integer "manager_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
+    t.index ["manager_id"], name: "index_users_on_manager_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -96,4 +98,5 @@ ActiveRecord::Schema.define(version: 2022_10_04_174508) do
   add_foreign_key "lists", "boards"
   add_foreign_key "plans", "users"
   add_foreign_key "tasks", "lists"
+  add_foreign_key "users", "users", column: "manager_id"
 end

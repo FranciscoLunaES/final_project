@@ -51,44 +51,44 @@
           class="rounded-circle me-1"
         />
       </a>
-      <a
-        href="#"
-        class="d-flex link-dark text-decoration-none add-member"
-        id="dropdownUser2"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        <i class="fa-solid fa-plus"></i>
-      </a>
+      <% if owner? %>
+        <%= link_to team_path, class:"d-flex link-dark text-decoration-none add-member" do %>
+          <i class="fa-solid fa-plus"></i>
+        <% end %>
+      <% end %>
     </div>
   </div>
   <div class="lists-container">
     <% @board.lists.each do |list| %>
+    <% presenter = ListPresenter.new(list.priority) %>
     <article class="card list">
-      <div class="card-header list-header">
-        <h4 class="name"><%= list.name %></h4>
-        <i
-          class="fa-solid fa-ellipsis"
-          id="listActions"
-          data-bs-toggle="dropdown"
-        ></i>
-        <ul
-          class="dropdown-menu text-small shadow"
-          aria-labelledby="listActions"
-        >
-          <li>
-            <a
-              class="dropdown-item"
-              data-bs-toggle="modal"
-              data-bs-target="#editListModal<%= list.id %>"
-              >Edit</a
-            >
-          </li>
-          <li class="item-danger-delete">
-            <%= link_to "Delete", board_list_path(@board, list), method:
-            :delete, data: {confirm: "Are you sure?"}, class:"dropdown-item" %>
-          </li>
-        </ul>
+      <div class="card-header">
+        <div class="list-header">
+          <h4 class="name"><%= list.name %></h4>
+          <i
+            class="fa-solid fa-ellipsis"
+            id="listActions"
+            data-bs-toggle="dropdown"
+          ></i>
+          <ul
+            class="dropdown-menu text-small shadow"
+            aria-labelledby="listActions"
+          >
+            <li>
+              <a
+                class="dropdown-item"
+                data-bs-toggle="modal"
+                data-bs-target="#editListModal<%= list.id %>"
+                >Edit</a
+              >
+            </li>
+            <li class="item-danger-delete">
+              <%= link_to "Delete", board_list_path(@board, list), method:
+              :delete, data: {confirm: "Are you sure?"}, class:"dropdown-item" %>
+            </li>
+          </ul>
+        </div>
+        <span class="badge <%= presenter.priority_color %>"><%= list.priority %></span>
       </div>
       <div class="card-body list-body">
         <% list.tasks.each do |task| %>

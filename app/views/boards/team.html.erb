@@ -1,0 +1,11 @@
+<%= @user.name %>
+<%= @user.surname %>
+<%= @user.email %>
+<%= @user.authorization_tier %>
+<% @team.each_with_index do |teammate, index| %>
+  <%= teammate.name %>
+  <%= teammate.surname %>
+  <%= teammate.email %>
+  <%= teammate.authorization_tier %>
+<% end %>
+<%= link_to "Add",new_user_invitation_path, class:"d-flex link-dark text-decoration-none add-member" %>

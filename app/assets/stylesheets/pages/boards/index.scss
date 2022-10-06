@@ -35,6 +35,7 @@
     }
     .row-boards {
       display: flex;
+      flex-wrap: wrap;
       width: 100%;
       gap: 20px;
       margin: 40px 0;
