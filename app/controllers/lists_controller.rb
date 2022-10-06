@@ -1,6 +1,8 @@
 class ListsController < ApplicationController
   before_action :set_board, only: %i[create update destroy]
   before_action :set_list, only: %i[update destroy]
+  before_action :require_autorized, only: %i[update destroy]
+
   grant(
     member: :all,
     manager: :all,

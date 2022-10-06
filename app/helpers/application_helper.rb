@@ -23,7 +23,6 @@ module ApplicationHelper
 
   def task_labels(task)
     task_labels = TaskLabel.where(task_id: task).collect(&:label_id).uniq
-    puts (task_labels)
     Label.where(id: task_labels)
   end
 end
