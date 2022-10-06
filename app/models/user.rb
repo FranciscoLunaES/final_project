@@ -3,6 +3,8 @@
 class User < ApplicationRecord
   include AuthorizedPersona::Persona
 
+  has_many :subscriptions
+
   has_many :plans, dependent: :destroy
   has_many :boards, dependent: :destroy
 

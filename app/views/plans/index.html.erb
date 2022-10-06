@@ -15,7 +15,7 @@
               <span class="duration"><%= pluralize(plan.duration, "Month") %></span>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary">Purchase</button>
+              <%= link_to "Purchase", new_subscription_path(:plan_id => plan.id), class:"btn btn-primary" %>
             </div>
           </articles>
           <div class="full-characteristics">

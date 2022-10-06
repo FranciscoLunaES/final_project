@@ -1,0 +1,9 @@
+
+  <%= @plan.name %>
+  <%= @plan.duration %>
+  <%= @plan.quantity_members %>
+  <%= @plan.price_cents %>
+  <%= @plan.price_currency %>
+  <div>
+    <%= button_to '+', {:controller => "subscriptions", :action => "create", :plan_id => @plan.id} , :method=>:post  %>
+  </div>

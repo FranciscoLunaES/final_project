@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_05_212943) do
+ActiveRecord::Schema.define(version: 2022_10_06_201815) do
 
   create_table "boards", force: :cascade do |t|
     t.string "visibility"
@@ -43,6 +43,19 @@ ActiveRecord::Schema.define(version: 2022_10_05_212943) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.integer "quantity_members"
+    t.integer "duration"
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "USD", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "task_labels", force: :cascade do |t|

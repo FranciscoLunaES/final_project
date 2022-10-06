@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   get '/team', to: 'boards#team'
 
+  resources :subscriptions
+
   resources :labels
   resources :tags
   resources :plans
