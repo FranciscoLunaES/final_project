@@ -2,12 +2,16 @@
 
 class ApplicationController < ActionController::Base
   include AuthorizedPersona::Authorization
-  helper_method :logged_in?, :owner?
+  helper_method :logged_in?, :owner?, :subscribed?
 
   authorize_persona class_name: 'User'
 
   def logged_in?
     !!current_user
+  end
+
+  def subscribed?
+    current_user.subscriptions.where(active: 'true')
   end
 
   def teammate?

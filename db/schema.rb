@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_06_201815) do
+ActiveRecord::Schema.define(version: 2022_10_07_210804) do
 
   create_table "boards", force: :cascade do |t|
     t.string "visibility"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2022_10_06_201815) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "token_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
@@ -99,6 +100,8 @@ ActiveRecord::Schema.define(version: 2022_10_06_201815) do
     t.integer "invited_by_id"
     t.integer "invitations_count", default: 0
     t.integer "manager_id"
+    t.string "customer_id"
+    t.string "card_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"

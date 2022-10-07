@@ -14,8 +14,15 @@
               <p class="price">$<%= "#{plan.price_cents}  #{plan.price_currency}" %></p>
               <span class="duration"><%= pluralize(plan.duration, "Month") %></span>
             </div>
-            <div class="card-footer">
-              <%= link_to "Purchase", new_subscription_path(:plan_id => plan.id), class:"btn btn-primary" %>
+            <div class="card-footer d-flex flex-column">
+              <% if !subscribed? %>
+                <% if !logged_in? %>
+                  <%= link_to "Purchase", new_subscription_path(:plan_id => plan.id), "btn btn-primary" %>
+                  <%= link_to "Sign up first", new_user_registration_path %>
+                <% else %>
+                  <%= link_to "Purchase", new_subscription_path(:plan_id => plan.id), class:"btn btn-primary"  %>
+                <% end %>
+              <% end %>
             </div>
           </articles>
           <div class="full-characteristics">

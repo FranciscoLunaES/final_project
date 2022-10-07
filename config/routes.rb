@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   get '/team', to: 'boards#team'
+  post '/card', to: 'subscriptions#card'
 
   resources :subscriptions
 

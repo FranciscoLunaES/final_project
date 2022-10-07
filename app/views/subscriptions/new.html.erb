@@ -1,9 +1,31 @@
+<%= @plan.name %> <%= @plan.duration %> <%= @plan.quantity_members %> <%=
+@plan.price_cents %> <%= @plan.price_currency %>
+<div>
+  <%= button_to 'Subscribe', {:controller => "subscriptions", :action => "create",
+  :plan_id => @plan.id} , :method=>:post %>
+</div>
 
-  <%= @plan.name %>
-  <%= @plan.duration %>
-  <%= @plan.quantity_members %>
-  <%= @plan.price_cents %>
-  <%= @plan.price_currency %>
+<% if !current_user.card_id %>
+  <%= form_with(url: "/card", local: true) do |f| %>
+    <span class="labels-label">Añadir tarjeta</span>
+    <div class="add-label">
+      <%= f.label :number %>
+      <%= f.number_field :number %>
+      <%= f.label :exp_month %>
+      <%= f.text_field :exp_month %>
+      <%= f.label :exp_year %>
+      <%= f.text_field :exp_year %>
+      <%= f.label :cvc %>
+      <%= f.number_field :cvc %>
+      <div
+        class="d-flex justify-content-center align-items-center me-2 plus"
+        style="width: 25px; height: 25px"
+      >
+        <%= f.submit "Save", class: "btn label-plus" %>
+      </div>
+  <% end %>
+<% else %>
   <div>
-    <%= button_to '+', {:controller => "subscriptions", :action => "create", :plan_id => @plan.id} , :method=>:post  %>
+    <p>You already have a default card</p>
   </div>
+<% end %>

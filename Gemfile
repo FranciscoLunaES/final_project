@@ -28,6 +28,7 @@ gem 'bootstrap', '~> 5.2.1'
 gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
 gem 'money-rails', '~>1.12'
+gem 'stripe'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'font-awesome-sass', '~> 6.2.0'
@@ -43,8 +44,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'letter_opener'
   gem 'rubocop-rails', require: false
-  gem "letter_opener"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
