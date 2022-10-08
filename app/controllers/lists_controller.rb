@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
   before_action :set_board, only: %i[create update destroy]
   before_action :set_list, only: %i[update destroy]
-  before_action :require_autorized, only: %i[update destroy]
+  before_action :require_autorized, only: %i[create update destroy]
 
   grant(
     member: :all,
@@ -53,5 +53,12 @@ class ListsController < ApplicationController
 
   def reached_max_lists?
     @board.lists.length > 50
+  end
+
+  def require_permision
+    unless owner?
+      flash[:alert] = 'Only the manager can perform that action'
+      redirect_to @board
+    end
   end
 end

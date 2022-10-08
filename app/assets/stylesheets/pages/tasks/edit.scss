@@ -130,6 +130,28 @@
               color: #fff;
             }
           }
+          .assigned-to {
+            display: flex;
+            flex-direction: column;
+            .users-assigned {
+              display: flex;
+              .add-member {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #8783d1;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                background-color: #8783d1;
+                padding: 0 8px;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                text-indent: 1px;
+                color: #fff;
+              }
+            }
+          }
         }
       }
       .modal-footer {

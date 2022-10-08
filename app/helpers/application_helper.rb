@@ -9,6 +9,22 @@ module ApplicationHelper
     Label.all.collect { |l| [l.name, l.id] }
   end
 
+  def teammates_select
+    User.where(manager_id: @board.user_id).collect { |u| [u.name, u.id] }
+  end
+
+  def users_assigned(task)
+    teammates_select.select { |_name, id| user_assigned_task?(task, id) }
+  end
+
+  def users_unassigned(task)
+    teammates_select.reject { |_name, id| user_assigned_task?(task, id) }
+  end
+
+  def user_assigned_task?(task,id)
+    UserTask.where(task_id: task).collect(&:user_id).include?(id)
+  end
+
   def points_for_select
     [1, 2, 3, 4, 5, 8, 13]
   end

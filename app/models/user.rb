@@ -13,6 +13,9 @@ class User < ApplicationRecord
 
   belongs_to :manager, class_name: 'User', optional: true
 
+  has_many :user_tasks
+  has_many :tasks, through: :user_tasks
+
   validates :name, presence: true,
                    length: { minimum: 3, maximum: 15 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

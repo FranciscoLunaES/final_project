@@ -24,6 +24,7 @@
           <% end %>
         </div>
       </div>
+
       <%= form_with(model: [board, list, task], local: true, method: :patch, id:
       "task_edit_#{task.id}") do |f| %>
       <div class="modal-body form-new-task">
@@ -83,9 +84,9 @@
             <%= form_with(url: "/tags", local: true) do |l| %>
             <span class="labels-label">Label</span>
             <div class="add-label">
-              <%= l.hidden_field :task_id, :value => task.id %>
-              <%= l.select(:label_id, labels_for_select, {}, class:
-              "select-labels form-select") %>
+              <%= l.hidden_field :task_id, :value => task.id %> <%=
+              l.select(:label_id, labels_for_select, {}, class: "select-labels
+              form-select") %>
               <div
                 class="d-flex justify-content-center align-items-center me-2 plus"
                 style="width: 25px; height: 25px"
@@ -102,6 +103,32 @@
             <% end %>
           </div>
 
+          <div class="assigned-to">
+            <div class="label-container">
+              <p>Assigned to</p>
+            </div>
+            <div class="users-assigned">
+              <% users_assigned(task.id).each do |user| %>
+                <a
+                  href="#"
+                  class="d-flex align-items-center link-dark text-decoration-none rounded-circle me-1"
+                  id="dropdownUser2"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                 <%= user[0].chr %>
+                </a>
+              <% end %>
+              <%= form_with(model: UserTask.new, local: true) do |a| %>
+              <div>
+                <%= a.hidden_field :task_id, :value => task.id %> <%=
+                a.select(:user_id, users_unassigned(task.id),{ :prompt => "+" },
+                class: 'd-flex text-decoration-none add-member', onchange: "this.form.submit();") %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+
           <div class="item-danger-delete">
             <%= link_to "Delete", board_list_task_path(board, list, task),
             method: :delete, data: {confirm: "Are you sure?"},
@@ -111,7 +138,8 @@
       </div>
       <div class="modal-footer">
         <div class="form-group row justify-content-center">
-          <%= submit_tag "Save changes", class:"btn edit-task-btn", form:"task_edit_#{task.id}" %>
+          <%= submit_tag "Save changes", class:"btn edit-task-btn",
+          form:"task_edit_#{task.id}" %>
         </div>
       </div>
     </div>

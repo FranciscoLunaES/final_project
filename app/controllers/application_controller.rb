@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include AuthorizedPersona::Authorization
-  helper_method :logged_in?, :owner?, :subscribed?
+  helper_method :logged_in?, :owner?, :subscribed?, :teammates
 
   authorize_persona class_name: 'User'
 
@@ -11,7 +11,18 @@ class ApplicationController < ActionController::Base
   end
 
   def subscribed?
-    current_user.subscriptions.where(active: 'true')
+    if current_user
+      current_user.subscriptions.where(active: 'true')
+    else
+      false
+    end
+  end
+
+  def require_permision
+    unless owner? || teammate?
+      flash[:alert] = 'Only the manager or teammate can perform that action'
+      redirect_to @board
+    end
   end
 
   def teammate?
