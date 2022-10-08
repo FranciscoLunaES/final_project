@@ -1,6 +1,7 @@
 class PlansController < ApplicationController
-  skip_before_action :authorize!
-  before_action :set_plan, only: %i[update destroy]
+  skip_before_action :authorize!, only: [:index]
+  before_action :set_plan, only: %i[edit update destroy]
+
   grant(
     member: %i[index show],
     manager: %i[index show],
@@ -10,6 +11,8 @@ class PlansController < ApplicationController
   def index
     @plans = Plan.all
   end
+
+  def new; end
 
   def create
     @plan = Plan.new(plan_params)
@@ -27,10 +30,12 @@ class PlansController < ApplicationController
     end
   end
 
+  def edit; end
+
   def update
     if @plan.update(plan_params)
       flash[:notice] = 'Plan was updated successfully'
-      redirect_to @plan
+      redirect_to plans_path
     else
       flash.now[:alert] = 'There was something wrong with your plan'
     end
@@ -47,11 +52,12 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
   end
 
-  def reached_max_boards?
-    current_user.boards.length > 10
+  def reached_max_plans?
+    byebug
+    current_user.plans.length > 3
   end
 
   def plan_params
-    params.require(:board).permit(:name, :quantity_members, :duration, :price_cents, :price_currency)
+    params.require(:plan).permit(:name, :quantity_members, :duration, :price_cents, :price_currency)
   end
 end
