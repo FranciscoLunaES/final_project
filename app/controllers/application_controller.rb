@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def subscribed?
     if current_user
-      current_user.subscriptions.where(active: 'true')
+      current_user.subscriptions.where(active: 'true').empty?
     else
       false
     end

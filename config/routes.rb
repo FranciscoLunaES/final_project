@@ -12,7 +12,6 @@ Rails.application.routes.draw do
       resources :tasks
     end
   end
-
   get '/team', to: 'boards#team'
   post '/card', to: 'subscriptions#card'
   resources :user_tasks

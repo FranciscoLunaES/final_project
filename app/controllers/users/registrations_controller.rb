@@ -4,6 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   skip_before_action :authorize!
   # before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_params, only: [:create]
 
   # GET /resource/sign_up
   # def new
@@ -13,7 +14,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    Payment.create_customer(current_user.email)
+    if @user.persisted?
+      Payment.create_customer(current_user.email)
+      SendEmailWelcomeWorker.perform_async(@user.id) if @user.security_updates
+    end
   end
 
   # GET /resource/edit
@@ -22,9 +26,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super do |resource|
+      SendEmailUpdateProfileWorker.perform_async(resource.id) if resource.security_updates
+    end
+  end
 
   # DELETE /resource
   # def destroy
@@ -43,9 +49,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name surname authorization_tier])
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params

@@ -12,6 +12,8 @@ class SubscriptionsController < ApplicationController
     @subscription.token_id = payment.id
     if @subscription.save
       current_user.update(authorization_tier: 'manager')
+      SendEmailFinishedSubscriptionWorker.perform_at(@subscription.created_at +
+        @subscription.duration.months, current_user.id)
       flash[:notice] = 'Subscription was accomplished'
       redirect_to boards_path
     else

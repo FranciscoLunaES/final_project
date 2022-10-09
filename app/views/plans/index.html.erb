@@ -15,7 +15,7 @@
               <span class="duration"><%= pluralize(plan.duration, "Month") %></span>
             </div>
             <div class="card-footer d-flex flex-column">
-              <% if !subscribed? %>
+              <% if subscribed? %>
                 <% if !logged_in? %>
                   <%= link_to "Purchase", "", class:"btn btn-primary disabled" %>
                   <%= link_to "Sign up first", new_user_registration_path %>

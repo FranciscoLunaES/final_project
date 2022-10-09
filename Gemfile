@@ -28,6 +28,8 @@ gem 'bootstrap', '~> 5.2.1'
 gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
 gem 'money-rails', '~>1.12'
+gem 'redis'
+gem 'sidekiq', '~>6.0.0'
 gem 'stripe'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
