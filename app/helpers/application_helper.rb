@@ -21,7 +21,7 @@ module ApplicationHelper
     teammates_select.reject { |_name, id| user_assigned_task?(task, id) }
   end
 
-  def user_assigned_task?(task,id)
+  def user_assigned_task?(task, id)
     UserTask.where(task_id: task).collect(&:user_id).include?(id)
   end
 
@@ -40,5 +40,9 @@ module ApplicationHelper
   def task_labels(task)
     task_labels = TaskLabel.where(task_id: task).collect(&:label_id).uniq
     Label.where(id: task_labels)
+  end
+
+  def history_by_task(task)
+    TaskHistory.where(task_id: task).order(created_at: :asc).collect { |u| [u.list_name, u.created_at.strftime('%d %b at %l:%M %P')] }
   end
 end

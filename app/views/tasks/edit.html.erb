@@ -58,6 +58,25 @@
               "Add your justification" %>
             </div>
           </div>
+          <div class="modification-history">
+            <span
+              class="title accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseOne"
+              aria-expanded="false"
+              aria-controls="flush-collapseOne"
+              >Modification history <i class="fa-solid fa-chevron-down ms-2"></i></span
+            >
+            <div class="history-list accordion-collapse collapse" id="flush-collapseOne" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+              <% history_by_task(task).each do |history| %>
+              <div class="history">
+                <%= content_tag(:span, history[0], class:"list-name") %> <%=
+                content_tag(:span, history[1], class:"date-history") %>
+              </div>
+              <% end %>
+            </div>
+          </div>
         </div>
         <div class="aside-form">
           <div class="date-control">
@@ -109,21 +128,22 @@
             </div>
             <div class="users-assigned">
               <% users_assigned(task.id).each do |user| %>
-                <a
-                  href="#"
-                  class="d-flex align-items-center link-dark text-decoration-none rounded-circle me-1"
-                  id="dropdownUser2"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                 <%= user[0].chr %>
-                </a>
-              <% end %>
-              <%= form_with(model: UserTask.new, local: true) do |a| %>
+              <a
+                href="#"
+                class="d-flex align-items-center link-dark text-decoration-none rounded-circle me-1"
+                id="dropdownUser2"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <%= user[0].chr %>
+              </a>
+              <% end %> <%= form_with(model: UserTask.new, local: true) do |a|
+              %>
               <div>
                 <%= a.hidden_field :task_id, :value => task.id %> <%=
                 a.select(:user_id, users_unassigned(task.id),{ :prompt => "+" },
-                class: 'd-flex text-decoration-none add-member', onchange: "this.form.submit();") %>
+                class: 'd-flex text-decoration-none add-member', onchange:
+                "this.form.submit();") %>
               </div>
               <% end %>
             </div>

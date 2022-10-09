@@ -49,6 +49,29 @@
               height: 120px;
             }
           }
+          .modification-history {
+            display: flex;
+            flex-direction: column;
+            .title {
+              font-weight: 400;
+              font-size: 16px;
+              color: rgba(0, 0, 0, 0.8);
+            }
+            .history-list {
+              flex-direction: column;
+              .history{
+                display: flex;
+                .list-name {
+                  font-weight: 700;
+                  font-size: 14px;
+                  margin-right: 5px;
+                }
+                .date-history {
+                  font-size: 14px;
+                }
+              }
+            }
+          }
         }
         .aside-form {
           padding-top: 15px;

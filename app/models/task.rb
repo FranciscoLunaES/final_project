@@ -1,4 +1,7 @@
 class Task < ApplicationRecord
+  after_create :create_history
+  before_update :create_history
+
   belongs_to :list
 
   has_many :TaskLabels
@@ -12,4 +15,10 @@ class Task < ApplicationRecord
 
   validates :title, presence: true,
                     length: { minimum: 3, maximum: 50 }
+
+  has_many :task_histories, dependent: :destroy
+
+  def create_history
+    TaskHistory.create(task: self, list_name: list.name) if list_id_change
+  end
 end
