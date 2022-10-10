@@ -34,9 +34,18 @@ class BoardsController < ApplicationController
 
   def index
     @boards = Board.all
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
-  def show; end
+  def show
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
 
   def update
     if @board.update(board_params)
