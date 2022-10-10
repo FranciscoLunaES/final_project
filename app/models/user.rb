@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true,
                    length: { minimum: 3, maximum: 15 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email, presence: true,
                     uniqueness: { case_sensitive: false },
                     length: { maximum: 105 },
@@ -40,5 +40,4 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
 end

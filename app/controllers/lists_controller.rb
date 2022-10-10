@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ListsController < ApplicationController
   before_action :set_board, only: %i[create update destroy]
   before_action :set_list, only: %i[update destroy]
@@ -56,9 +58,9 @@ class ListsController < ApplicationController
   end
 
   def require_permision
-    unless owner?
-      flash[:alert] = 'Only the manager can perform that action'
-      redirect_to @board
-    end
+    return if owner?
+
+    flash[:alert] = 'Only the manager can perform that action'
+    redirect_to @board
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlansController < ApplicationController
   skip_before_action :authorize!, only: [:index]
   before_action :set_plan, only: %i[edit update destroy]
@@ -53,6 +55,7 @@ class PlansController < ApplicationController
   end
 
   def plan_params
-    params.require(:plan).permit(:name, :description, :quantity_members, :duration, :price_cents, :price_currency, :image)
+    params.require(:plan).permit(:name, :description, :quantity_members, :duration, :price_cents, :price_currency,
+                                 :image)
   end
 end

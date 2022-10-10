@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LabelsController < ApplicationController
   skip_before_action :authorize!
 

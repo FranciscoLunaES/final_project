@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Payment
   def self.create_customer(email)
     Stripe::Customer.create(email: email)

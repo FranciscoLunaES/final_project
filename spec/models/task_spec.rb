@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
@@ -5,7 +7,7 @@ RSpec.describe Task, type: :model do
     @user = create(:user)
     @board = create(:board, user_id: @user.id)
     @list = create(:list, board_id: @board.id)
-    @task = build(:task, list_id: @list.id)
+    @task = build(:task, list_id: @list.id, author_id: @user.id)
   end
 
   it 'creates a task if it is valid' do

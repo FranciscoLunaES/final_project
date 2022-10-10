@@ -6,9 +6,7 @@ module ApplicationHelper
   end
 
   def admin?
-    if current_user
-      current_user.authorization_tier == 'admin'
-    end
+    current_user.authorization_tier == 'admin' if current_user
   end
 
   def labels_for_select

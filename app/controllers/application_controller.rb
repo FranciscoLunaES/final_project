@@ -19,10 +19,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_permision
-    unless owner? || teammate?
-      flash[:alert] = 'Only the manager or teammate can perform that action'
-      redirect_to @board
-    end
+    return if owner? || teammate?
+
+    flash[:alert] = 'Only the manager or teammate can perform that action'
+    redirect_to @board
   end
 
   def teammate?
@@ -42,10 +42,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_autorized
-    unless owner? || teammate?
-      flash[:alert] = 'Only the owner or a teammate can perform that action'
-      redirect_to @board
-    end
+    return if owner? || teammate?
+
+    flash[:alert] = 'Only the owner or a teammate can perform that action'
+    redirect_to @board
   end
 
   def reached_max_plans?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BoardsController < ApplicationController
   before_action :set_board, only: %i[show update destroy]
   before_action :require_autorized, only: %i[update destroy]
@@ -65,10 +67,10 @@ class BoardsController < ApplicationController
   end
 
   def require_visible
-    if private? && (owner? || teammate?)
-      flash[:alert] = "You can't perform that action the board is not public"
-      redirect_to boards_path
-    end
+    return unless private? && (owner? || teammate?)
+
+    flash[:alert] = "You can't perform that action the board is not public"
+    redirect_to boards_path
   end
 
   def reached_max_boards?

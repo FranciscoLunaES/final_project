@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubscriptionsController < ApplicationController
   skip_before_action :authorize!
   before_action :set_plan, only: %i[new create]

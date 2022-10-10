@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TasksController < ApplicationController
   before_action :set_board, only: %i[create update destroy]
   before_action :set_list, only: %i[create update destroy]
@@ -51,14 +53,15 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :details, :doing_time, :justification, :started_at, :finished_at, :list_id, :image)
+    params.require(:task).permit(:title, :details, :doing_time, :justification, :started_at, :finished_at, :list_id,
+                                 :image)
   end
 
   def require_ownership
-    unless owner? || task_owner?
-      flash[:alert] = 'Only the manager or the task owner can perform that action'
-      redirect_to @board
-    end
+    return if owner? || task_owner?
+
+    flash[:alert] = 'Only the manager or the task owner can perform that action'
+    redirect_to @board
   end
 
   def task_owner?

@@ -7,8 +7,8 @@
 puts 'Seeding...'
 
 user = User.create(email: Faker::Internet.email,
-                   name: Faker::Internet.name,
-                   surname: Faker::Internet.name,
+                   name: Faker::Name.name,
+                   surname: Faker::Name.name,
                    security_updates: true,
                    authorization_tier: 'member',
                    password: 'test123')
@@ -29,7 +29,15 @@ Task.create(title: 'Fix login page',
             justification: 'Has a bug',
             started_at: '2022-09-26 23:10:19',
             finished_at: '2022-09-26 23:10:19',
-            list_id: list.id)
+            list_id: list.id,
+            author_id: user.id)
+
+Plan.create(name: Faker::Subscription.plan,
+            description: Faker::Company.catch_phrase,
+            quantity_members: Faker::Number.between(from: 1, to: 20),
+            duration: Faker::Number.between(from: 1, to: 12),
+            price_cents: Faker::Number.number(digits: 3),
+            price_currency: Faker::Currency.code, user_id: user.id)
 
 Label.create(name: 'bug',
              color: 'red')

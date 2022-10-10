@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserTasksController < ApplicationController
   grant(
     manager: :all,

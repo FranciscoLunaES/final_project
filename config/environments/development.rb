@@ -44,8 +44,6 @@ Rails.application.configure do
   config.active_job.queue_adapter = :sidekiq
   config.active_job.queue_name_prefix = 'task_taker'
   config.active_job.queue_name_delimiter = '_'
-  
-
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
