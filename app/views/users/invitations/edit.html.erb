@@ -24,6 +24,11 @@
       <%= f.label :password_confirmation %><br />
       <%= f.password_field :password_confirmation %>
     </div>
+
+    <div class="field">
+      <%= f.label :security_updates %><br />
+      <%= f.check_box_tag :security_updates %>
+    </div>
   <% end %>
 
   <div class="actions">

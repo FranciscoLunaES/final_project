@@ -4,6 +4,24 @@
   background-color: rgb(248, 249, 250);
   flex-direction: column;
   height: 93%;
+  .list-plans-header {
+    display: flex;
+    justify-content: space-between;
+    .add-plan-container {
+      display: flex;
+      .plus {
+        border: 1px solid rgba(13, 110, 253, 0.7);
+        border-radius: 50%;
+      }
+      .plus,
+      .new-board {
+        color: rgba(13, 110, 253, 0.7);
+      }
+      .new-board {
+        font-weight: 700;
+      }
+    }
+  }
   .plans-container {
     display: flex;
     justify-content: space-around;
@@ -24,6 +42,18 @@
         --bs-card-cap-bg: none;
         padding: 20px 0;
         margin-bottom: 20px;
+        .plan-actions {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          z-index: 1;
+          .item-danger-delete {
+            background-color: rgba(255, 111, 89, 1);
+            a {
+              color: #fff;
+            }
+          }
+        }
         .card-header {
           .plan-image {
             width: 50px;
@@ -36,10 +66,11 @@
             font-size: 25px;
             margin-bottom: 2px;
           }
-          .small-description, .duration {
+          .small-description,
+          .duration {
             font-weight: 300;
           }
-          .duration{
+          .duration {
             font-size: 18px;
           }
         }

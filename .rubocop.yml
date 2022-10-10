@@ -10,5 +10,8 @@ Layout/LineLength:
     - config/initializers/devise.rb
 
 AllCops:
+  SuggestExtensions: false
   Exclude:
     - bin/bundle
+    - db/schema.rb
+    - db/migrate/*

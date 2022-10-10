@@ -11,9 +11,15 @@ Rails.application.routes.draw do
     resources :lists do
       resources :tasks
     end
-  end 
+  end
+  get '/team', to: 'boards#team'
+  post '/card', to: 'subscriptions#card'
+  resources :user_tasks
+
+  resources :subscriptions
+
   resources :labels
   resources :tags
   resources :plans
-  root 'pages#home'
+  root 'plans#index'
 end

@@ -24,6 +24,7 @@
           <% end %>
         </div>
       </div>
+
       <%= form_with(model: [board, list, task], local: true, method: :patch, id:
       "task_edit_#{task.id}") do |f| %>
       <div class="modal-body form-new-task">
@@ -57,6 +58,41 @@
               "Add your justification" %>
             </div>
           </div>
+
+          <div class="form-group row">
+            <div class="label-container">
+              <i class="fa-solid fa-paperclip"></i>
+              <%= f.label :image, class: "col-form-label" %><br />
+            </div>
+            <div class="col-12">
+              <%= f.file_field :image, class: "field-area" %>
+            </div>
+          </div>
+
+          <div class="modification-history">
+            <span
+              class="title accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseOne"
+              aria-expanded="false"
+              aria-controls="flush-collapseOne"
+              >Modification history <i class="fa-solid fa-chevron-down ms-2"></i
+            ></span>
+            <div
+              class="history-list accordion-collapse collapse"
+              id="flush-collapseOne"
+              aria-labelledby="flush-headingOne"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <% history_by_task(task).each do |history| %>
+              <div class="history">
+                <%= content_tag(:span, history[0], class:"list-name") %> <%=
+                content_tag(:span, history[1], class:"date-history") %>
+              </div>
+              <% end %>
+            </div>
+          </div>
         </div>
         <div class="aside-form">
           <div class="date-control">
@@ -83,9 +119,9 @@
             <%= form_with(url: "/tags", local: true) do |l| %>
             <span class="labels-label">Label</span>
             <div class="add-label">
-              <%= l.hidden_field :task_id, :value => task.id %>
-              <%= l.select(:label_id, labels_for_select, {}, class:
-              "select-labels form-select") %>
+              <%= l.hidden_field :task_id, :value => task.id %> <%=
+              l.select(:label_id, labels_for_select, {}, class: "select-labels
+              form-select") %>
               <div
                 class="d-flex justify-content-center align-items-center me-2 plus"
                 style="width: 25px; height: 25px"
@@ -102,6 +138,51 @@
             <% end %>
           </div>
 
+          <div class="assigned-to">
+            <div class="label-container">
+              <p>Assigned to</p>
+            </div>
+            <div class="users-assigned">
+              <% users_assigned(task.id).each do |user| %>
+                <a
+                  href="#"
+                  class="d-flex align-items-center link-dark text-decoration-none rounded-circle me-1"
+                  id="dropdownUser2"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <%= image_tag user[0], class: "d-flex align-items-center rounded-circle me-1", style:"width: 32px; height: 32px" %>
+                </a>
+              <% end %>
+              <% (1..teammates_default_unselected(task)).each do |team| %>
+                <a
+                  href="#"
+                  class="d-flex align-items-center link-dark text-decoration-none"
+                  id="dropdownUser2"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="https://github.com/mdo.png"
+                    alt=""
+                    width="32"
+                    height="32"
+                    class="rounded-circle me-1"
+                  />
+                </a>
+              <% end %> 
+              <%= form_with(model: UserTask.new, local: true) do |a|
+              %>
+              <div>
+                <%= a.hidden_field :task_id, :value => task.id %> <%=
+                a.select(:user_id, users_unassigned(task.id),{ :prompt => "+" },
+                class: 'd-flex text-decoration-none add-member', onchange:
+                "this.form.submit();") %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+
           <div class="item-danger-delete">
             <%= link_to "Delete", board_list_task_path(board, list, task),
             method: :delete, data: {confirm: "Are you sure?"},
@@ -111,7 +192,8 @@
       </div>
       <div class="modal-footer">
         <div class="form-group row justify-content-center">
-          <%= submit_tag "Save changes", class:"btn edit-task-btn", form:"task_edit_#{task.id}" %>
+          <%= submit_tag "Save changes", class:"btn edit-task-btn",
+          form:"task_edit_#{task.id}" %>
         </div>
       </div>
     </div>
