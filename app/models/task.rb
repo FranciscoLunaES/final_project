@@ -6,6 +6,7 @@ class Task < ApplicationRecord
 
   has_many :TaskLabels
   has_many :labels, through: :TaskLabels
+  has_one_attached :image, dependent: :destroy
 
   has_many :user_tasks
   has_many :users, through: :user_tasks

@@ -58,6 +58,17 @@
               "Add your justification" %>
             </div>
           </div>
+
+          <div class="form-group row">
+            <div class="label-container">
+              <i class="fa-solid fa-paperclip"></i>
+              <%= f.label :image, class: "col-form-label" %><br />
+            </div>
+            <div class="col-12">
+              <%= f.file_field :image, class: "field-area" %>
+            </div>
+          </div>
+
           <div class="modification-history">
             <span
               class="title accordion-button collapsed"
@@ -66,9 +77,14 @@
               data-bs-target="#flush-collapseOne"
               aria-expanded="false"
               aria-controls="flush-collapseOne"
-              >Modification history <i class="fa-solid fa-chevron-down ms-2"></i></span
+              >Modification history <i class="fa-solid fa-chevron-down ms-2"></i
+            ></span>
+            <div
+              class="history-list accordion-collapse collapse"
+              id="flush-collapseOne"
+              aria-labelledby="flush-headingOne"
+              data-bs-parent="#accordionFlushExample"
             >
-            <div class="history-list accordion-collapse collapse" id="flush-collapseOne" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
               <% history_by_task(task).each do |history| %>
               <div class="history">
                 <%= content_tag(:span, history[0], class:"list-name") %> <%=

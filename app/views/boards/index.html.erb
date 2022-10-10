@@ -58,9 +58,13 @@
         </div>
         <%= link_to board_path(board), class: "nav-link link-dark" do %>
         <div class="card board">
-          <div class="board-circle rounded-circle">
-            <%= image_tag("rocket", class: "image-board") %>
-          </div>
+          <% if board.image.attached? %>
+              <%= image_tag board.image, class:"image-board attached board-circle rounded-circle"%>
+          <% else %>
+            <div class="board-circle rounded-circle">
+              <%= image_tag("rocket", class: "image-board") %>
+            </div>
+          <% end %>
           <h4 class="name"><%= board.name %></h4>
           <p class="tasks-counter"><%= board.lists.count %></p>
           <span class="tasks-label">Tasks complete</span>
@@ -111,20 +115,5 @@
       <% end %>
     </div>
   </article>
-  <nav class="pagination-container">
-    <ul class="pagination">
-      <li class="page-item disabled">
-        <a class="page-link">Previous</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item active" aria-current="page">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    </ul>
-  </nav>
 </section>
 <%= render template: "boards/new", locals: {boards: @boards} %>

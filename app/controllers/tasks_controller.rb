@@ -53,7 +53,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :details, :doing_time, :justification, :started_at, :finished_at, :list_id)
+    params.require(:task).permit(:title, :details, :doing_time, :justification, :started_at, :finished_at, :list_id, :image)
   end
 
   def require_ownership

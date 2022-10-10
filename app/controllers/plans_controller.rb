@@ -53,11 +53,10 @@ class PlansController < ApplicationController
   end
 
   def reached_max_plans?
-    byebug
     current_user.plans.length > 3
   end
 
   def plan_params
-    params.require(:plan).permit(:name, :quantity_members, :duration, :price_cents, :price_currency)
+    params.require(:plan).permit(:name, :quantity_members, :duration, :price_cents, :price_currency, :image)
   end
 end

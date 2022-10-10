@@ -61,15 +61,13 @@ class BoardsController < ApplicationController
   end
 
   def board_params
-    params.require(:board).permit(:name, :description, :visibility)
+    params.require(:board).permit(:name, :description, :visibility, :image)
   end
 
   def require_visible
-    if private?
-      unless (owner? || teammate?)
-        flash[:alert] = "You can't perform that action the board is not public"
-        redirect_to boards_path
-      end
+    if private? && !owner? || teammate?
+      flash[:alert] = "You can't perform that action the board is not public"
+      redirect_to boards_path
     end
   end
 

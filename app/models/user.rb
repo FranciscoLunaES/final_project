@@ -4,7 +4,7 @@ class User < ApplicationRecord
   include AuthorizedPersona::Persona
 
   has_many :subscriptions
-
+  has_one_attached :image, dependent: :destroy
   has_many :plans, dependent: :destroy
   has_many :boards, dependent: :destroy
 

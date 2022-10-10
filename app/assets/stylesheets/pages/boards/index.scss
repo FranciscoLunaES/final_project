@@ -20,7 +20,7 @@
       }
       .add-board-container {
         display: flex;
-        .plus{
+        .plus {
           border: 1px solid rgba(13, 110, 253, 0.7);
           border-radius: 50%;
         }
@@ -64,6 +64,9 @@
           align-items: center;
           margin-bottom: 10px;
           padding-top: 10px;
+          .attached {
+            object-fit: cover;
+          }
           .board-circle {
             width: 100px;
             background-color: rgba(242, 237, 111, 0.3);

@@ -43,6 +43,17 @@
               "Add your justification" %>
             </div>
           </div>
+
+          <div class="form-group row">
+            <div class="label-container">
+              <i class="fa-solid fa-paperclip"></i>
+              <%= f.label :image, class: "col-form-label" %><br />
+            </div>
+            <div class="col-12">
+              <%= f.file_field :image, class: "field-area" %>
+            </div>
+          </div>
+
         </div>
         <div class="aside-form">
           <div class="date-control">

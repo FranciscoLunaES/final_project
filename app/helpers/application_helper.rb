@@ -9,6 +9,14 @@ module ApplicationHelper
     Label.all.collect { |l| [l.name, l.id] }
   end
 
+  def teammates_images
+    User.where(manager_id: @board.user_id).select { |u| u.image.attached? }
+  end
+
+  def teammates_default_image
+    teammates_select.length - teammates_images.length
+  end
+
   def teammates_select
     User.where(manager_id: @board.user_id).collect { |u| [u.name, u.id] }
   end
@@ -43,6 +51,8 @@ module ApplicationHelper
   end
 
   def history_by_task(task)
-    TaskHistory.where(task_id: task).order(created_at: :asc).collect { |u| [u.list_name, u.created_at.strftime('%d %b at %l:%M %P')] }
+    TaskHistory.where(task_id: task).order(created_at: :asc).collect do |u|
+      [u.list_name, u.created_at.strftime('%d %b at %l:%M %P')]
+    end
   end
 end
