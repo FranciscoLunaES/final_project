@@ -1,31 +1,70 @@
-<%= @plan.name %> <%= @plan.duration %> <%= @plan.quantity_members %> <%=
-@plan.price_cents %> <%= @plan.price_currency %>
-<div>
-  <%= button_to 'Subscribe', {:controller => "subscriptions", :action => "create",
-  :plan_id => @plan.id} , :method=>:post %>
-</div>
-
-<% if !current_user.card_id %>
-  <%= form_with(url: "/card", local: true) do |f| %>
-    <span class="labels-label">Añadir tarjeta</span>
-    <div class="add-label">
-      <%= f.label :number %>
-      <%= f.number_field :number %>
-      <%= f.label :exp_month %>
-      <%= f.text_field :exp_month %>
-      <%= f.label :exp_year %>
-      <%= f.text_field :exp_year %>
-      <%= f.label :cvc %>
-      <%= f.number_field :cvc %>
-      <div
-        class="d-flex justify-content-center align-items-center me-2 plus"
-        style="width: 25px; height: 25px"
-      >
-        <%= f.submit "Save", class: "btn label-plus" %>
-      </div>
-  <% end %>
-<% else %>
-  <div>
-    <p>You already have a default card</p>
+<div class="subscription-payment">
+  <div class="subscription-container">
+    <div class="card-container">
+      <articles class="card plan-card">
+        <div class="card-header">
+          <% if @plan.image.attached? %> <%= image_tag @plan.image,
+          class:"plan-image attached board-circle rounded-circle"%> <% else %>
+          <%= image_tag("rocket", class: "plan-image") %> <% end %>
+          <h3><%= @plan.name %></h3>
+        </div>
+        <div class="card-body">
+          <p class="small-description"><%= @plan.description %></p>
+          <p class="price">
+            $<%= "#{@plan.price_cents} #{@plan.price_currency}" %>
+          </p>
+          <span class="duration"><%= pluralize(@plan.duration, "Month") %></span>
+        </div>
+        <div class="card-footer d-flex flex-column">
+          <% if !current_user.card_id %>
+            <%= button_to 'Subscribe',"", class: "btn btn-primary disabled" %>
+          <% else %>
+            <%= button_to 'Subscribe', {:controller => "subscriptions", :action => "create",
+              :plan_id => @plan.id} , :method=>:post, class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </articles>
+    </div>
   </div>
-<% end %>
+
+  <div class="card add-card">
+    <div class="card-header">
+      <span class="labels-label">Añadir tarjeta</span>
+    </div>
+    <div class="card-body">
+      <% if !current_user.card_id %>
+        <%= form_with(url: "/card", local: true) do |f| %>
+          <div class="add-card-fields">
+            <div class="field">
+              <%= f.label :number %>
+              <%= f.number_field :number, class: "form-control form-control-lg"%>
+            </div>
+
+            <div class="field col-4">
+              <%= f.label :exp_month %>
+              <%= f.number_field :exp_month, class: "form-control form-control-lg"%>
+            </div>
+
+            <div class="field col-4">
+              <%= f.label :exp_year %>
+              <%= f.number_field :exp_year, class: "form-control form-control-lg" %>
+            </div>
+
+            <div class="field col-4">
+              <%= f.label :cvc %>
+              <%= f.number_field :cvc, class: "form-control form-control-lg" %>
+            </div>
+            <div
+              class="d-flex justify-content-center align-items-center me-2 btn-container"
+            >
+              <%= f.submit "Save", class: "btn btn-success btn-save" %>
+            </div>
+        <% end %>
+      <% else %>
+        <div>
+          <p>You already have a default card</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -65,7 +65,7 @@ class BoardsController < ApplicationController
   end
 
   def require_visible
-    if private? && !owner? || teammate?
+    if private? && (owner? || teammate?)
       flash[:alert] = "You can't perform that action the board is not public"
       redirect_to boards_path
     end

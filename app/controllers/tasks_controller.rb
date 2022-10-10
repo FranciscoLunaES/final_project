@@ -14,8 +14,6 @@ class TasksController < ApplicationController
   def create
     @task = @list.tasks.new(task_params)
     @task.user = current_user
-    mail = UsersMailer.welcome_email(current_user.id)
-    mail.deliver_now
     if @task.save
       flash[:notice] = 'Task was created successfully'
       redirect_to @board

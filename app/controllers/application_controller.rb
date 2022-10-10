@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include AuthorizedPersona::Authorization
-  helper_method :logged_in?, :owner?, :subscribed?, :teammates
+  helper_method :logged_in?, :owner?, :subscribed?, :teammates, :reached_max_plans?
 
   authorize_persona class_name: 'User'
 
@@ -46,5 +46,9 @@ class ApplicationController < ActionController::Base
       flash[:alert] = 'Only the owner or a teammate can perform that action'
       redirect_to @board
     end
+  end
+
+  def reached_max_plans?
+    current_user.plans.length >= 3
   end
 end

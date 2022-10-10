@@ -2,7 +2,13 @@
 
 module ApplicationHelper
   def lists_for_select
-    List.all.collect { |l| [l.name, l.id] }
+    List.where(board_id: @board).collect { |l| [l.name, l.id] }
+  end
+
+  def admin?
+    if current_user
+      current_user.authorization_tier == 'admin'
+    end
   end
 
   def labels_for_select
@@ -14,19 +20,27 @@ module ApplicationHelper
   end
 
   def teammates_default_image
-    teammates_select.length - teammates_images.length
+    all_teammates.length - teammates_images.length
   end
 
-  def teammates_select
+  def teammates_default_unselected(task)
+    all_teammates.length - users_assigned(task).length - users_unassigned(task).length
+  end
+
+  def all_teammates
     User.where(manager_id: @board.user_id).collect { |u| [u.name, u.id] }
   end
 
+  def teammates_with_image
+    User.where(manager_id: @board.user_id).select { |u| u.image.attached? }.collect { |u| [u.image, u.id] }
+  end
+
   def users_assigned(task)
-    teammates_select.select { |_name, id| user_assigned_task?(task, id) }
+    teammates_with_image.select { |_name, id| user_assigned_task?(task, id) }
   end
 
   def users_unassigned(task)
-    teammates_select.reject { |_name, id| user_assigned_task?(task, id) }
+    all_teammates.reject { |_name, id| user_assigned_task?(task, id) }
   end
 
   def user_assigned_task?(task, id)

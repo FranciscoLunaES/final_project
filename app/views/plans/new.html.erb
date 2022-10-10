@@ -14,6 +14,11 @@
                 </div>
 
                 <div class="form-outline form-dark mb-4">
+                  <%= f.label :description, class:"form-label" %><br />
+                  <%= f.text_field :description, autofocus: true, autocomplete: "name", class:"form-control form-control-lg" %>
+                </div>
+
+                <div class="form-outline form-dark mb-4">
                   <%= f.label :quantity_members, class:"form-label" %><br />
                   <%= f.text_field :quantity_members, autofocus: true, autocomplete: "name", class:"form-control form-control-lg" %>
                 </div>

@@ -1,31 +1,42 @@
-<h2><%= t "devise.invitations.new.header" %></h2>
+<section >
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-white text-dark" style="border-radius: 1rem;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+          <div class="card-body p-5 text-center">
+            <div class="pb-5">
+              <h2 class="fw-bold mb-2 text-uppercase"><%= t "devise.invitations.new.header" %></h2>
+              <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
+                  <%= render "users/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+                <% resource.class.invite_key_fields.each do |field| -%>
+                  <div class="form-outline form-dark mb-4">
+                    <%= f.label field %><br />
+                    <%= f.text_field field, autofocus: true, class:"form-control form-control-lg" %>
+                  </div>
+                <% end -%>
 
-  <% resource.class.invite_key_fields.each do |field| -%>
-    <div class="field">
-      <%= f.label field %><br />
-      <%= f.text_field field %>
+                <div class="form-outline form-dark mb-4">
+                  <%= f.label :name, class:"form-label" %><br />
+                  <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control form-control-lg" %>
+                </div>
+
+                <div class="form-outline form-dark mb-4">
+                  <%= f.label :surname, class:"form-label" %><br />
+                  <%= f.text_field :surname, autofocus: true, autocomplete: "surname", class:"form-control form-control-lg" %>
+                </div>
+                
+                <div class="form-outline form-dark mb-4">
+                  <%= f.label :authorization_tier, class:"form-label" %><br />
+                  <%= f.select :authorization_tier, options_for_select(User.roles.map { |key, value| [key.humanize, key] }), {prompt: "Select Role"}, autocomplete: "new-password", class:"form-control form-control-lg" %>
+                </div>
+
+                <%= f.submit t("devise.invitations.new.submit_button"), class:"btn btn-outline-primary btn-lg px-5" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end -%>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= f.label :surname %>
-    <%= f.text_field :surname %>
-  </div>
-
-  <div class="field">
-    <%= f.label :authorization_tier %>
-    <%= f.select :authorization_tier, options_for_select(User.roles.map { |key, value| [key.humanize, key] }), {prompt: "Select Role"} %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit t("devise.invitations.new.submit_button") %>
-  </div>
-<% end %>
+</section>

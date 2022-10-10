@@ -29,6 +29,7 @@
         <a class="new-board navbar-brand">New project</a>
       </div>
     </div>
+    <%= render "shared/errors" %>
     <div class="row-boards public-boards" style="display: flex">
       <% presenter.public_boards.each do |board| %>
       <div class="full-card-board">

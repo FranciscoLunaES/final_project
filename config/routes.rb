@@ -21,5 +21,5 @@ Rails.application.routes.draw do
   resources :labels
   resources :tags
   resources :plans
-  root 'pages#home'
+  root 'plans#index'
 end

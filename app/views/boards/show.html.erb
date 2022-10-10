@@ -41,6 +41,7 @@
       <% end %>
     </div>
   </div>
+  <%= render "shared/errors" %>
   <div class="lists-container">
     <% @board.lists.each do |list| %>
     <% presenter = ListPresenter.new(list.priority) %>

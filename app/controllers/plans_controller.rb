@@ -52,11 +52,7 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
   end
 
-  def reached_max_plans?
-    current_user.plans.length > 3
-  end
-
   def plan_params
-    params.require(:plan).permit(:name, :quantity_members, :duration, :price_cents, :price_currency, :image)
+    params.require(:plan).permit(:name, :description, :quantity_members, :duration, :price_cents, :price_currency, :image)
   end
 end

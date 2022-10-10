@@ -144,16 +144,34 @@
             </div>
             <div class="users-assigned">
               <% users_assigned(task.id).each do |user| %>
-              <a
-                href="#"
-                class="d-flex align-items-center link-dark text-decoration-none rounded-circle me-1"
-                id="dropdownUser2"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <%= user[0].chr %>
-              </a>
-              <% end %> <%= form_with(model: UserTask.new, local: true) do |a|
+                <a
+                  href="#"
+                  class="d-flex align-items-center link-dark text-decoration-none rounded-circle me-1"
+                  id="dropdownUser2"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <%= image_tag user[0], class: "d-flex align-items-center rounded-circle me-1", style:"width: 32px; height: 32px" %>
+                </a>
+              <% end %>
+              <% (1..teammates_default_unselected(task)).each do |team| %>
+                <a
+                  href="#"
+                  class="d-flex align-items-center link-dark text-decoration-none"
+                  id="dropdownUser2"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="https://github.com/mdo.png"
+                    alt=""
+                    width="32"
+                    height="32"
+                    class="rounded-circle me-1"
+                  />
+                </a>
+              <% end %> 
+              <%= form_with(model: UserTask.new, local: true) do |a|
               %>
               <div>
                 <%= a.hidden_field :task_id, :value => task.id %> <%=

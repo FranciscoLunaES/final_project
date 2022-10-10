@@ -1,11 +1,50 @@
-<%= @user.name %>
-<%= @user.surname %>
-<%= @user.email %>
-<%= @user.authorization_tier %>
-<% @team.each_with_index do |teammate, index| %>
-  <%= teammate.name %>
-  <%= teammate.surname %>
-  <%= teammate.email %>
-  <%= teammate.authorization_tier %>
-<% end %>
-<%= link_to "Add",new_user_invitation_path, class:"d-flex link-dark text-decoration-none add-member" %>
+<section class="list-team">
+  <article class="team-container">
+    <div class="board-index-header">
+      <div
+        class="add-board-container"
+        data-bs-toggle="modal"
+        data-bs-target="#newBoardModal"
+      >
+        <div
+          class="d-flex justify-content-center align-items-center me-2 plus"
+          style="width: 25px; height: 25px"
+        >
+          <i class="fa-solid fa-plus"></i>
+        </div>
+        <%= link_to "New member" ,new_user_invitation_path, class:"new-board
+        navbar-brand" %>
+      </div>
+    </div>
+    <div class="row-team" style="display: flex">
+      <div class="full-card-board">
+        <div class="card board">
+          <% if @user.image.attached? %> <%= image_tag @user.image,
+          class:"image-board attached board-circle rounded-circle"%> <% else %>
+          <div class="board-circle rounded-circle">
+            <%= image_tag("rocket", class: "image-board") %>
+          </div>
+          <% end %>
+          <h4 class="name"><%= "#{@user.name} #{@user.surname}" %></h4>
+          <p class="tasks-counter"><%= @user.authorization_tier %></p>
+          <span class="tasks-label"><%= @user.email %></span>
+        </div>
+      </div>
+      <% @team.each_with_index do |teammate, index| %>
+      <div class="full-card-board">
+        <div class="card board">
+          <% if teammate.image.attached? %> <%= image_tag teammate.image,
+          class:"image-board attached board-circle rounded-circle"%> <% else %>
+          <div class="board-circle rounded-circle">
+            <%= image_tag("rocket", class: "image-board") %>
+          </div>
+          <% end %>
+          <h4 class="name"><%= "#{teammate.name} #{teammate.surname}" %></h4>
+          <p class="tasks-counter"><%= teammate.authorization_tier %></p>
+          <span class="tasks-label"><%= teammate.email %></span>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </article>
+</section>
