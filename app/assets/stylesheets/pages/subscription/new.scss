@@ -1,0 +1,82 @@
+.subscription-payment {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  height: 600px;
+  .subscription-container {
+    display: flex;
+    justify-content: space-around;
+    align-self: center;
+    gap: 10px;
+    margin-top: 50px;
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      .plan-card {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        width: 250px;
+        margin-right: 10px;
+        --bs-card-cap-bg: none;
+        padding: 20px 0;
+        margin-bottom: 20px;
+        .plan-actions {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          z-index: 1;
+          .item-danger-delete {
+            background-color: rgba(255, 111, 89, 1);
+            a {
+              color: #fff;
+            }
+          }
+        }
+        .card-header {
+          .plan-image {
+            width: 50px;
+          }
+        }
+        .card-body {
+          width: 70%;
+          .price {
+            font-weight: 400;
+            font-size: 25px;
+            margin-bottom: 2px;
+          }
+          .small-description,
+          .duration {
+            font-weight: 300;
+          }
+          .duration {
+            font-size: 18px;
+          }
+        }
+        .card-header,
+        .card-footer {
+          border: 0;
+        }
+      }
+    }
+  }
+  .add-card {
+    display: flex;
+    width: 300px;
+    height: 300px;
+    .add-card-fields {
+      display: flex;
+      flex-wrap: wrap;
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 20px;
+        .btn-save {
+          width: 80%;
+        }
+      }
+    }
+  }
+}

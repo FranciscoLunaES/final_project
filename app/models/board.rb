@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Board < ApplicationRecord
   belongs_to :user
   has_many :lists, dependent: :destroy
@@ -6,4 +8,5 @@ class Board < ApplicationRecord
                    length: { minimum: 3, maximum: 15 }
 
   validates :visibility, inclusion: { in: %w[public private] }
+  has_one_attached :image, dependent: :destroy
 end

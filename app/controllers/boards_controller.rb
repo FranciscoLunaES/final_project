@@ -1,12 +1,20 @@
+# frozen_string_literal: true
+
 class BoardsController < ApplicationController
   before_action :set_board, only: %i[show update destroy]
-  before_action :require_autorized, only: %i[show update destroy]
+  before_action :require_autorized, only: %i[update destroy]
+  before_action :require_visible, only: %i[show]
+  before_action :set_user, only: %i[index team]
 
   grant(
     member: %i[index show],
     manager: :all,
     admin: :all
   )
+
+  def team
+    @team = User.all.where(manager_id: current_user)
+  end
 
   def create
     @board = Board.new(board_params)
@@ -25,11 +33,19 @@ class BoardsController < ApplicationController
   end
 
   def index
-    @user = current_user
     @boards = Board.all
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
-  def show; end
+  def show
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
 
   def update
     if @board.update(board_params)
@@ -47,19 +63,23 @@ class BoardsController < ApplicationController
 
   private
 
+  def set_user
+    @user = current_user
+  end
+
   def set_board
     @board = Board.find(params[:id])
   end
 
   def board_params
-    params.require(:board).permit(:name, :description, :visibility)
+    params.require(:board).permit(:name, :description, :visibility, :image)
   end
 
-  def require_autorized
-    unless current_user.id == @board.user_id || @board.visibility == 'public'
-      flash[:alert] = 'Only the owner or if is public can perform that action'
-      redirect_to boards_path
-    end
+  def require_visible
+    return unless private? && (owner? || teammate?)
+
+    flash[:alert] = "You can't perform that action the board is not public"
+    redirect_to boards_path
   end
 
   def reached_max_boards?

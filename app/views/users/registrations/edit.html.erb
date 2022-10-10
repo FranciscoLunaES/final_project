@@ -9,11 +9,31 @@
               <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
                 <%= render "devise/shared/error_messages", resource: resource %>
 
+                <div class="form-outline form-dark mb-4">
+                  <%= f.label :image, class:"form-label" %><br />
+                  <%= f.file_field :image, autofocus: true, class:"form-control form-control-lg" %>
+                </div>
                 
                 <div class="form-outline form-dark mb-4">
                   <%= f.label :email, class:"form-label" %><br />
                   <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control form-control-lg" %>
                 </div>
+
+                <div class="form-outline form-dark mb-4">
+                  <%= f.label :name, class:"form-label" %><br />
+                  <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control form-control-lg" %>
+                </div>
+
+                <div class="form-outline form-dark mb-4">
+                  <%= f.label :surname, class:"form-label" %><br />
+                  <%= f.text_field :surname, autofocus: true, autocomplete: "surname", class:"form-control form-control-lg" %>
+                </div>
+
+                <div class="form-outline form-dark mb-4 d-flex justify-content-center">
+                  <%= f.check_box :security_updates, class: "me-2"%>
+                  <%= f.label :security_updates %>
+                </div>
+                      
                 
                 <div class="form-outline form-dark mb-4">
                   <%= f.label :password, class:"form-label" %>
@@ -26,6 +46,11 @@
                 <div class="form-outline form-dark mb-4">
                   <%= f.label :password_confirmation, class:"form-label" %><br />
                   <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control form-control-lg" %>
+                </div>
+
+                <div class="form-outline form-dark mb-4">
+                  <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+                  <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control form-control-lg" %>
                 </div>
                 
                 <p class="small mb-5 pb-lg-2"><a class="text-dark-50" href="#!">Forgot password?</a></p>
