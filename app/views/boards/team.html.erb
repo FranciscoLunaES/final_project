@@ -6,6 +6,7 @@
         data-bs-toggle="modal"
         data-bs-target="#newBoardModal"
       >
+        <% if reach_max_of_members? %>
         <div
           class="d-flex justify-content-center align-items-center me-2 plus"
           style="width: 25px; height: 25px"
@@ -13,7 +14,7 @@
           <i class="fa-solid fa-plus"></i>
         </div>
         <%= link_to "New member" ,new_user_invitation_path, class:"new-board
-        navbar-brand" %>
+        navbar-brand" %> <% end %>
       </div>
     </div>
     <div class="row-team" style="display: flex">

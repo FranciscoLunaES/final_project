@@ -9,6 +9,10 @@ module ApplicationHelper
     current_user.authorization_tier == 'admin' if current_user
   end
 
+  def reach_max_of_members?
+    current_user.subscriptions.first.quantity_members >= User.where(manager_id: current_user).length
+  end
+
   def labels_for_select
     Label.all.collect { |l| [l.name, l.id] }
   end
