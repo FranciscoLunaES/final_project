@@ -58,7 +58,8 @@ class TasksController < ApplicationController
   end
 
   def require_ownership
-    return if owner? || task_owner?
+    return if owner? || task_owner? # could be changed to current_user.owner?
+    # this is not authorization_persona style, this is another approach to permissions.
 
     flash[:alert] = 'Only the manager or the task owner can perform that action'
     redirect_to @board

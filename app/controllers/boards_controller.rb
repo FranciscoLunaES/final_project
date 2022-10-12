@@ -2,8 +2,8 @@
 
 class BoardsController < ApplicationController
   before_action :set_board, only: %i[show update destroy]
-  before_action :require_autorized, only: %i[update destroy]
-  before_action :require_visible, only: %i[show]
+  before_action :require_autorized, only: %i[update destroy] # looks like a model validation
+  before_action :require_visible, only: %i[show] # same for this one
   before_action :set_user, only: %i[index team]
 
   grant(

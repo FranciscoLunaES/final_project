@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# fancy module. trying to achieve a lot.
 module ApplicationHelper
   def lists_for_select
     List.where(board_id: @board).collect { |l| [l.name, l.id] }

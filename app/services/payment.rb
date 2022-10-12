@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# good example of a service.
 class Payment
   def self.create_customer(email)
     Stripe::Customer.create(email: email)

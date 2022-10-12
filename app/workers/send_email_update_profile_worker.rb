@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# great implementation of sidekiq jobs
 class SendEmailUpdateProfileWorker
   include Sidekiq::Worker
 

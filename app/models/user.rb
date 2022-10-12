@@ -41,3 +41,7 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
+
+# looks like your design pattern approach was
+# fat controller. skinny model. 
+# we should aim for the opposite.

@@ -147,6 +147,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.8-x86_64-darwin)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.22.1)
     parser (3.1.2.1)
@@ -270,6 +272,7 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.5.0-arm64-darwin)
+    sqlite3 (1.5.0-x86_64-darwin)
     stripe (7.1.0)
     thor (1.2.1)
     thread_safe (0.3.6)
@@ -304,6 +307,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-darwin-21
 
 DEPENDENCIES
   authorized_persona
@@ -342,4 +346,4 @@ RUBY VERSION
    ruby 2.6.8p205
 
 BUNDLED WITH
-   2.3.20
+   2.3.23

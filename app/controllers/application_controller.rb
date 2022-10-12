@@ -18,18 +18,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # if current_user.owner? || current_user.teammate? according to following revisions
   def require_permision
     return if owner? || teammate?
 
+    # text should be included as translations
     flash[:alert] = 'Only the manager or teammate can perform that action'
     redirect_to @board
   end
 
+  # look like a model method
   def teammate?
     current_user.manager_id == @board.user_id
   end
 
-  def public?
+  def public? # could be called board_ to 
+    # let developers know they'll need a board
     @board.visibility == 'public'
   end
 
@@ -37,6 +41,7 @@ class ApplicationController < ActionController::Base
     @board.visibility == 'private'
   end
 
+  # looks like a model method
   def owner?
     current_user.id == @board.user_id
   end

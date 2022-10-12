@@ -19,7 +19,7 @@ class PlansController < ApplicationController
   def create
     @plan = Plan.new(plan_params)
     @plan.user = current_user
-    if !reached_max_plans?
+    if !reached_max_plans? # looks like a model method
       if @plan.save
         flash[:notice] = 'Plan was created successfully'
         redirect_to plans_path
