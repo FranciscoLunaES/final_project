@@ -21,9 +21,9 @@ class BoardsController < ApplicationController
     @board.user = current_user
     if !reached_max_boards?
       if @board.save
-        flash[:notice] = 'Board was created successfully'
+        flash[:notice] = 'Board was created'
         redirect_to boards_path
-      else
+    else
         flash.now[:alert] = 'There was something wrong with your board'
       end
     else
